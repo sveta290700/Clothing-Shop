@@ -14,14 +14,22 @@ const Main = () => {
     const [order, setOrder] = useState({});
     const [categories, setCategories] = useState([]);
 
+    const fetchProducts = () => {
+        fetch("http://127.0.0.1:8000/api/products")
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    setProducts(result.data);
+                    },
+                (error) => {
+                    console.log('Error');
+                }
+                )
+    }
+
     const fetchCategories = async () => {
         const { data: categories } = await commerce.categories.list();
         setCategories(categories);
-    };
-
-    const fetchProducts = async () => {
-        const { data: products } = await commerce.products.list();
-        setProducts(products);
     };
 
     const fetchCart = async () => {
@@ -62,8 +70,8 @@ const Main = () => {
     };
 
     useEffect(() => {
-        fetchCategories();
         fetchProducts();
+        fetchCategories();
         fetchCart();
     }, []);
 

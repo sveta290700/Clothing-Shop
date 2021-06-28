@@ -7,15 +7,24 @@ $buttonColorSecondary: black
 .productCardTitle
     padding-top: 100px
     padding-bottom: 2vh
+    cursor: default
+
+.productInfo
+    display: flex
+    flex-direction: row
+    cursor: default
 
 .productCard
     margin: auto
-    height: 530px
-    width: 600px
+    height: 100%
+    width: 100%
+    display: flex
+    flex-direction: column
+    justify-content: space-between
 
-.productCardMedia
-    height: 0
-    padding-top: 55%
+.productImage
+    height: 400px
+    width: 267px
 
 .productCardActions
     display: flex
@@ -28,14 +37,14 @@ $buttonColorSecondary: black
 
 .productCardName
     &:first-child
-        font-size: 14pt
+        font-size: 13pt
         margin-bottom: 0.35em
         text-decoration: none
         color: $primaryTextColor
 
 .productCardPrice
     &:last-child
-        font-size: 14pt
+        font-size: 13pt
         margin-bottom: 0.35em
         color: $primaryTextColor
 

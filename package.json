@@ -30,6 +30,7 @@
     },
     "dependencies": {
         "@chec/commerce.js": "^2.7.1",
-        "@material-ui/lab": "*"
+        "@material-ui/lab": "*",
+        "react-addons-create-fragment": "^15.6.2"
     }
 }

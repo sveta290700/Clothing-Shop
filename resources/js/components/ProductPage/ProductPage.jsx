@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Card, CardMedia, CardContent, CardActions, Typography, Button, Container } from '@material-ui/core';
+import { Card, CardMedia, CardContent, CardActions, Typography, Button, Container, Paper } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-
-import { commerce } from '../../lib/commerce';
 
 import './styles.sass';
 
@@ -17,18 +15,18 @@ const ProductPage = ({ onAddToCart }) => {
 
     const [product, setProduct] = useState({});
 
-    const fetchProduct = async (id) => {
-        const response = await commerce.products.retrieve(id);
-        const { name, price, media, quantity, description } = response;
-        setProduct({
-            id,
-            name,
-            quantity,
-            description,
-            src: media.source,
-            price: price.formatted_with_symbol,
-        });
-    };
+    const fetchProduct = (id) => {
+        fetch("http://127.0.0.1:8000/api/products/" + id)
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    setProduct(result.data);
+                },
+                (error) => {
+                    console.log('Error');
+                }
+            )
+    }
 
     useEffect(() => {
         const id = window.location.pathname.split("/");
@@ -40,8 +38,11 @@ const ProductPage = ({ onAddToCart }) => {
             <Typography className="productCardTitle" variant="h3">
                 Информация о товаре
             </Typography>
+            <div className="productInfo">
+            <Paper className="productImage">
+                <img src={product.image} />
+            </Paper>
             <Card className="productCard">
-                <CardMedia className="productCardMedia" image={product.src} title={product.name} />
                 <CardContent>
                     <div className="productCardContent">
                         <Typography className="productCardName">
@@ -51,10 +52,15 @@ const ProductPage = ({ onAddToCart }) => {
                             {product.price}
                         </Typography>
                     </div>
-                    <Typography className="productCardCategory" variant="body2">
-                        {product.id}
+                    <Typography gutterBottom>
+                        Категория товара: {product.category_id}
                     </Typography>
-                    <Typography className="productCardDescription" dangerouslySetInnerHTML={{ __html: product.description }} variant="body2" component="p" />
+                    <Typography gutterBottom>
+                        {product.description}
+                    </Typography>
+                    <Typography gutterBottom>
+                        {product.characteristics}
+                    </Typography>
                 </CardContent>
                 <CardActions disableSpacing className="productCardActions">
                     <Button className="addToCartButton" variant="outlined" color={buttonState.secondClickFlag ? "secondary" : "primary"}
@@ -63,6 +69,7 @@ const ProductPage = ({ onAddToCart }) => {
                     </Button>
                 </CardActions>
             </Card>
+            </div>
             <div className="back">
                 <Button className="backButton" variant="outlined" component={Link} to="/">
                     Назад

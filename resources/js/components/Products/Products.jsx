@@ -43,22 +43,8 @@ const Products = ({ products, categories, onAddToCart }) => {
                             ))}
                         </List>
                     </div>
-                    <div className="priceFilter">
-                        <Typography className="priceFilterLabel" variant="h6">
-                            Фильтр по цене:
-                        </Typography>
-                        <Slider className="priceSlider"
-                                min={0}
-                                max={5000}
-                                step={100}
-                                value={value}
-                                onChange={handleChange}
-                                valueLabelDisplay="on"
-                                aria-labelledby="range-slider"
-                                getAriaValueText={valuetext} />
-                    </div>
                 </div>
-                <Grid className="items" container spacing={4}>
+                <Grid className="items" container spacing={3}>
                     {products.map((product) => (
                         <Grid item key={product.id} xs={12} sm={6} md={4} lg={3}>
                             <Product product={product} onAddToCart={onAddToCart} />

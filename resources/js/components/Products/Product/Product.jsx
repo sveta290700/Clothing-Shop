@@ -15,21 +15,21 @@ const Product = ({ product, onAddToCart }) => {
 
     return (
         <Card className="root">
-            <CardMedia className="media" image={product.media.source} title={product.name} component={Link} to={`product/${product.id}`} />
+            <CardMedia className="media" image={product.image} title={product.name} component={Link} to={`product/${product.id}`} />
             <CardContent>
                 <div className="cardContent">
                     <Typography className="productName" component={Link} to={`product/${product.id}`}>
                         {product.name}
                     </Typography>
                     <Typography className="productPrice">
-                        {product.price.formatted_with_symbol}
+                        {product.price}
                     </Typography>
                 </div>
                 <Typography className="category" variant="body2">
-                    {product.category}
+                    {product.category_id}
                 </Typography>
             </CardContent>
-            <CardActions disableSpacing className="cardActions">
+            <CardActions className="cardActions">
                 <Button className="addToCartButton" variant="outlined" color={buttonState.secondClickFlag ? "secondary" : "primary"}
                         onClick={() => { goToCart(); setButtonState({ text: "В корзине", clickCount: ++buttonState.clickCount, secondClickFlag: true }); onAddToCart(product.id, 1, buttonState.secondClickFlag) }}>
                     {buttonState.text}
