@@ -1,0 +1,50 @@
+$textColorPrimary: black
+$buttonTextColor: white
+$buttonColorPrimary: #f50057
+$buttonColorSecondary: black
+
+.MuiTypography-root.formTitle.MuiTypography-h6
+    margin-bottom: 10px
+    margin-top: 10px
+
+.MuiGrid-root.formGrid.MuiGrid-container.MuiGrid-spacing-xs-2.MuiGrid-item.MuiGrid-grid-xs-12, .orderComment
+    margin-bottom: 5px
+    margin-top: 5px
+
+.buttons
+    display: flex
+    justify-content: space-between
+    padding-top: 10px
+
+.toCartButton, .backButton
+    width: 200px
+    &:first-child
+        color: $buttonTextColor
+        margin-right: 20px
+        font-weight: bold
+        background-color: $buttonColorPrimary
+        &:hover
+            background-color: $buttonColorSecondary
+
+.nextButton, .submitOrder
+    width: 200px
+    &:last-child
+        color: $buttonTextColor
+        font-weight: bold
+        background-color: $buttonColorPrimary
+        &:hover
+            background-color: $buttonColorSecondary
+
+.MuiListItem-root.listItem
+    padding: 10px 0
+
+.MuiTypography-root.price.MuiTypography-subtitle1
+    font-weight: 700
+
+.orderConfirmation
+    display: flex
+    justify-сontent: space-between
+    flex-direction: column
+
+.MuiCheckbox-colorPrimary.Mui-checked
+    color: $buttonColorPrimary

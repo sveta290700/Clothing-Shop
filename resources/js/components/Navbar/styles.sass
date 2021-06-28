@@ -1,0 +1,36 @@
+$appBarColor: white
+$cartColor: black
+$titleColor: black
+$badgeColor: #f50057
+$badgeTextColor: white
+
+.appBar
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12)
+    margin-bottom: 10px
+    &.MuiAppBar-colorPrimary
+        background-color: $appBarColor
+
+.title
+    flex-grow: 1
+    align-items: center
+    display: flex
+    color: $titleColor
+    text-decoration: none
+    padding: 5px
+
+.MuiTypography-root.title.MuiTypography-h6
+    cursor: default
+
+.image
+    padding-right: 10px
+    height: 25px
+    cursor: pointer
+
+.MuiBadge-badge
+    &.MuiBadge-anchorOriginTopRightRectangle
+        background-color: $badgeColor
+        color: $badgeTextColor
+
+.cartIcon
+    &.MuiIconButton-root
+        color: $cartColor

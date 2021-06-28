@@ -1,0 +1,60 @@
+$primaryTextColor: black
+$secondaryTextColor: gray
+$buttonTextColor: white
+$buttonColorPrimary: #f50057
+$buttonColorSecondary: black
+
+.root
+    &:last-child
+        max-width: 100%
+
+.media
+    height: 0
+    padding-top: 55%
+
+.cardActions
+    display: flex
+    justify-content: flex-end
+
+.cardContent
+    display: flex
+    flex-wrap: wrap
+    justify-content: space-between
+
+.productName
+    &:first-child
+        font-size: 14pt
+        margin-bottom: 0.35em
+        text-decoration: none
+        color: $primaryTextColor
+
+.productPrice
+    &:last-child
+        font-size: 14pt
+        margin-bottom: 0.35em
+        color: $primaryTextColor
+        cursor: default
+
+.category
+    color: $secondaryTextColor
+    cursor: default
+
+.addToCartButton
+    &:first-child
+        font-weight: bold
+        border-radius: 5px
+        color: $buttonTextColor
+
+.MuiButtonBase-root.MuiButton-root.MuiButton-outlined.addToCartButton.MuiButton-outlinedPrimary
+    background-color: $buttonColorPrimary
+    border-color: $buttonColorPrimary
+    &:hover
+        background-color: $buttonColorSecondary
+        border-color: $buttonColorSecondary
+
+.MuiButtonBase-root.MuiButton-root.MuiButton-outlined.addToCartButton.MuiButton-outlinedSecondary
+    background-color: $buttonColorSecondary
+    border-color: $buttonColorSecondary
+    &:hover
+        background-color: $buttonColorPrimary
+        border-color: $buttonColorPrimary

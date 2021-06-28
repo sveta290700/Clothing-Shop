@@ -1,0 +1,23 @@
+$buttonTextColor: white
+$buttonColorPrimary: #f50057
+$buttonColorSecondary: black
+
+.cardCartContent
+    display: flex
+    justify-content: space-between
+
+.cardCartActions
+    justify-content: space-between
+
+.buttons
+    display: flex
+    align-items: center
+
+.removeButton
+    &:last-child
+        color: $buttonTextColor
+        margin-right: 20px
+        font-weight: bold
+        background-color: $buttonColorPrimary
+        &:hover
+            background-color: $buttonColorSecondary

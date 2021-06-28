@@ -1,0 +1,38 @@
+$textColorPrimary: black
+$buttonTextColor: white
+$buttonColorPrimary: #f50057
+$buttonColorSecondary: black
+
+.cartTitle
+    padding-top: 100px
+    padding-bottom: 2vh
+
+.backButton
+    width: 200px
+    &:first-child
+        color: $buttonTextColor
+        margin-right: 20px
+        font-weight: bold
+        background-color: $buttonColorPrimary
+        &:hover
+            background-color: $buttonColorSecondary
+
+.checkoutButton
+    width: 200px
+    &:last-child
+        color: $buttonTextColor
+        font-weight: bold
+        background-color: $buttonColorPrimary
+        &:hover
+            background-color: $buttonColorSecondary
+
+.link
+    text-decoration: none
+    color: $textColorPrimary
+
+.cartDetails
+    display: flex
+    padding-top: 6vh
+    padding-bottom: 4vh
+    width: 100%
+    justify-content: space-between

@@ -1,0 +1,52 @@
+$primaryColor: black
+$secondaryColor: #f50057
+
+.content
+    padding-top: 100px
+    max-width: 100%
+    display: flex
+    margin: auto
+    .items
+        margin: auto
+        max-width: 100%
+
+.MuiPagination-root
+    padding-top: 4vh
+    padding-bottom: 2vh
+    justify-content: center
+    display: flex
+
+.MuiPaginationItem-root
+    &:last-child
+        font-weight: bold
+
+.filters
+    width: 35%
+    margin: auto
+    padding: 40px 10% 40px 10%
+    display: flex
+    flex-direction: column
+    .categoryFilter
+        padding: 10%
+        display: flex
+        flex-direction: column
+        justify-content: left
+        .categoryLabel
+            cursor: default
+        .checkbox
+            color: $primaryColor
+    .priceFilter
+        padding: 10%
+
+.priceFilterLabel
+    width: 300px
+    padding-bottom: 20%
+    cursor: default
+
+.categoryFilterLabel
+    width: 300px
+    cursor: default
+
+.priceSlider
+    &:last-child
+        color: $primaryColor

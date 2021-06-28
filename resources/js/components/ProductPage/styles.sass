@@ -1,0 +1,63 @@
+$primaryTextColor: black
+$secondaryTextColor: gray
+$buttonTextColor: white
+$buttonColorPrimary: #f50057
+$buttonColorSecondary: black
+
+.productCardTitle
+    padding-top: 100px
+    padding-bottom: 2vh
+
+.productCard
+    margin: auto
+    height: 530px
+    width: 600px
+
+.productCardMedia
+    height: 0
+    padding-top: 55%
+
+.productCardActions
+    display: flex
+    justify-content: flex-end
+
+.productCardContent
+    display: flex
+    flex-wrap: wrap
+    justify-content: space-between
+
+.productCardName
+    &:first-child
+        font-size: 14pt
+        margin-bottom: 0.35em
+        text-decoration: none
+        color: $primaryTextColor
+
+.productCardPrice
+    &:last-child
+        font-size: 14pt
+        margin-bottom: 0.35em
+        color: $primaryTextColor
+
+.addToCartButton
+    &:first-child
+        font-weight: bold
+        border-radius: 5px
+        color: $buttonTextColor
+
+.back
+    padding-top: 4vh
+    padding-bottom: 2vh
+    display: flex
+    justify-content: flex-end
+
+.backButton
+    &:last-child
+        font-weight: bold
+        border-radius: 5px
+        color: $buttonTextColor
+        background-color: $buttonColorPrimary
+        border-color: $buttonColorPrimary
+        &:hover
+            background-color: $buttonColorSecondary
+            border-color: $buttonColorSecondary
