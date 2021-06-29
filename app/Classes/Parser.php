@@ -1,11 +1,11 @@
 <?php
 
-
 namespace App\Classes;
 
 use phpQuery;
 
 require_once(__DIR__.'\..\..\vendor\autoload.php');
+
 class Parser
 {
     public $categories = array();

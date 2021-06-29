@@ -8,10 +8,14 @@ use Illuminate\Http\Request;
 class CartController extends Controller
 {
 
-
     public function index()
     {
-        if(!isset($_COOKIE["cart_id"])) setcookie("cart_id", uniqid());
+        if(!isset($_COOKIE["cart_id"]))
+        {
+            $_COOKIE['cart_id'] = uniqid();
+            setcookie('cart_id', uniqid(), 0);
+        }
+
         $cart_id = $_COOKIE["cart_id"];
         $cart = \Cart::session($cart_id);
 
@@ -27,7 +31,12 @@ class CartController extends Controller
     {
         $product = Product::where('id', $request->id)->first();
 
-        if(!isset($_COOKIE['cart_id'])) setcookie('cart_id', uniqid());
+        if(!isset($_COOKIE['cart_id']))
+        {
+            $_COOKIE['cart_id'] = uniqid();
+            setcookie('cart_id', uniqid(), 0);
+        }
+
         $cart_id = $_COOKIE['cart_id'];
         $cart = \Cart::session($cart_id);
 
@@ -48,7 +57,12 @@ class CartController extends Controller
 
     public function update(Request $request){
 
-        if(!isset($_COOKIE['cart_id'])) setcookie('cart_id', uniqid());
+        if(!isset($_COOKIE['cart_id']))
+        {
+            $_COOKIE['cart_id'] = uniqid();
+            setcookie('cart_id', uniqid(), 0);
+        }
+
         $cart_id = $_COOKIE['cart_id'];
         $cart = \Cart::session($cart_id);
 
@@ -62,7 +76,12 @@ class CartController extends Controller
 
     public function delete(Request $request){
 
-        if(!isset($_COOKIE['cart_id'])) setcookie('cart_id', uniqid());
+        if(!isset($_COOKIE['cart_id']))
+        {
+            $_COOKIE['cart_id'] = uniqid();
+            setcookie('cart_id', uniqid(), 0);
+        }
+
         $cart_id = $_COOKIE['cart_id'];
         $cart = \Cart::session($cart_id);
 

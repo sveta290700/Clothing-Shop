@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\CategoryResource;
 use App\Models\Category;
 
 class CategoryController extends Controller
@@ -23,5 +24,10 @@ class CategoryController extends Controller
                 $category->save();
             }
         }
+    }
+
+    public function index()
+    {
+        return CategoryResource::collection(Category::all());
     }
 }

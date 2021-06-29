@@ -1,10 +1,40 @@
+$primaryTextColor: black
+$secondaryTextColor: gray
 $buttonTextColor: white
 $buttonColorPrimary: #f50057
 $buttonColorSecondary: black
 
+.root
+    &:last-child
+        height: 400px
+        display: flex
+        flex-direction: column
+        justify-content: space-between
+
+.media
+    height: 0
+    padding-top: 70%
+
 .cardCartContent
     display: flex
+    flex-wrap: wrap
     justify-content: space-between
+    flex-direction: column
+
+.productCardName
+    font-size: 13pt
+    margin-bottom: 0.35em
+    text-decoration: none
+    color: $primaryTextColor
+
+.productCardPrice
+    font-size: 13pt
+    color: $primaryTextColor
+    cursor: default
+
+.productCardCategory
+    color: $secondaryTextColor
+    cursor: default
 
 .cardCartActions
     justify-content: space-between

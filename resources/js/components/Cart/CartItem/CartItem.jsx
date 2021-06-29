@@ -3,20 +3,34 @@ import { Typography, Button, Card, CardActions, CardContent, CardMedia } from '@
 
 import './styles.sass';
 
-const CartItem = ({ item, onUpdateCartQty, onRemoveFromCart }) => {
+const CartItem = ({ item, onUpdateCart, onRemoveFromCart }) => {
+
+    const oneItem = () => {
+        if (item.quantity == 1)
+        {
+            onRemoveFromCart(item.id);
+        }
+    }
 
     return (
-        <Card className="cart-item">
-            <CardMedia image={item.media.source} alt={item.name} className="media" />
+        <Card className="root">
+            <CardMedia image={item.attributes.image} alt={item.name} className="media" />
             <CardContent className="cardCartContent">
-                <Typography variant="h5">{item.name}</Typography>
-                <Typography variant="h5">{item.line_total.formatted_with_symbol}</Typography>
+                <Typography className="productCardName">
+                    {item.name}
+                </Typography>
+                <Typography className="productCardPrice" gutterBottom>
+                    {item.price}.00
+                </Typography>
+                <Typography className="productCardCategory" variant="body2">
+                    {item.attributes.category_id}
+                </Typography>
             </CardContent>
             <CardActions className="cardCartActions">
                 <div className="buttons">
-                    <Button type="button" size="small" onClick={() => onUpdateCartQty(item.id, item.quantity - 1)}>-</Button>
+                    <Button type="button" size="small" onClick={() => {onUpdateCart(item.id, -1); oneItem()}}>-</Button>
                     <Typography>&nbsp;{item.quantity}&nbsp;</Typography>
-                    <Button type="button" size="small" onClick={() => onUpdateCartQty(item.id, item.quantity + 1)}>+</Button>
+                    <Button type="button" size="small" onClick={() => onUpdateCart(item.id, 1)}>+</Button>
                 </div>
                 <Button className="removeButton" variant="contained" type="button" onClick={() => onRemoveFromCart(item.id)}>Удалить</Button>
             </CardActions>

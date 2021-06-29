@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { Card, CardMedia, CardContent, CardActions, Typography, Button, Container, Paper } from '@material-ui/core';
-import { Link } from 'react-router-dom';
+import { Card, CardContent, CardActions, Typography, Button, Container, Paper } from '@material-ui/core';
+import { Link, useHistory } from 'react-router-dom';
 
 import './styles.sass';
 
 const ProductPage = ({ onAddToCart }) => {
 
+    const history = useHistory();
+
     const [buttonState, setButtonState] = useState({ text: "В корзину", clickCount: 0, secondClickFlag: false });
 
     function goToCart() {
         if (buttonState.clickCount > 0 && buttonState.secondClickFlag === true)
-            window.location = '/cart';
+            history.push("/cart");
     }
 
     const [product, setProduct] = useState({});
@@ -53,7 +55,7 @@ const ProductPage = ({ onAddToCart }) => {
                         </Typography>
                     </div>
                     <Typography gutterBottom>
-                        Категория товара: {product.category_id}
+                        Категория товара: {product.category_name}
                     </Typography>
                     <Typography gutterBottom>
                         {product.description}
@@ -64,7 +66,7 @@ const ProductPage = ({ onAddToCart }) => {
                 </CardContent>
                 <CardActions disableSpacing className="productCardActions">
                     <Button className="addToCartButton" variant="outlined" color={buttonState.secondClickFlag ? "secondary" : "primary"}
-                            onClick={() => { goToCart(); setButtonState({ text: "В корзине", clickCount: ++buttonState.clickCount, secondClickFlag: true }); onAddToCart(product.id, 1, buttonState.secondClickFlag) }}>
+                            onClick={() => { setButtonState({ text: "В корзине", clickCount: ++buttonState.clickCount, secondClickFlag: true }); goToCart(); onAddToCart(product.id, 1, buttonState.secondClickFlag)}}>
                         {buttonState.text}
                     </Button>
                 </CardActions>

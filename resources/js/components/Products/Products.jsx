@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Grid, Slider, Typography, List, ListItem, ListItemText, ListItemIcon, Checkbox } from '@material-ui/core/';
 import { Pagination } from '@material-ui/lab';
 
@@ -6,17 +6,7 @@ import Product from './Product/Product';
 
 import './styles.sass';
 
-function valuetext(value) {
-    return `${value}`;
-}
-
 const Products = ({ products, categories, onAddToCart }) => {
-
-    const [value, setValue] = useState([1500, 3000]);
-
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
-    };
 
     return (
         <main>
@@ -27,7 +17,7 @@ const Products = ({ products, categories, onAddToCart }) => {
                         <Typography className="categoryFilterLabel" variant="h6">
                             Фильтр по категории:
                         </Typography>
-                        <List component="nav" aria-label="main mailbox folders">
+                        <List component="nav" aria-label="main-nav">
                             {categories.map((category) => (
                                 <ListItem key={category.name} className="categoryLabel">
                                     <ListItemIcon>

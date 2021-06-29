@@ -8,6 +8,7 @@ import logo from '../../assets/logo.png';
 import './styles.sass';
 
 const Navbar = ({ totalItems }) => {
+
     const location = useLocation();
 
     return (

@@ -26,7 +26,6 @@ class ProductController extends Controller
         return ProductResource::collection($products);
     }
 
-
     /**
      * Display the specified resource.
      *
@@ -38,12 +37,9 @@ class ProductController extends Controller
         return new ProductResource(Product::find($id));
     }
 
-
-
-
-    public function addParsing($products_parser){
+    public function addParsing($products_parser) {
         if (Product::all()->count() == 0)
-            foreach ($products_parser as $product_parser){
+            foreach ($products_parser as $product_parser) {
                 $product = new Product();
                 $product["name"] = $product_parser["name"];
                 $product["description"] = $product_parser["description"];
@@ -57,10 +53,10 @@ class ProductController extends Controller
                 $product["category_id"] = $category->id;
                 $product->save();
             }
-        else{
+        else {
             foreach(Product::all() as $product)
                 $product->delete();
-            foreach ($products_parser as $product_parser){
+            foreach ($products_parser as $product_parser) {
                 $product = new Product();
                 $product["name"] = $product_parser["name"];
                 $product["description"] = $product_parser["description"];

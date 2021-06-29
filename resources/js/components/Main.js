@@ -1,67 +1,80 @@
 import React, { useState, useEffect } from 'react';
+import ReactDOM from 'react-dom';
 import { Navbar, Products, Cart, ProductPage, Checkout } from '../components';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-import { commerce } from '../lib/commerce';
-
-import '../styles.sass';
-
-import ReactDOM from 'react-dom';
+import './styles.sass';
 
 const Main = () => {
     const [products, setProducts] = useState([]);
     const [cart, setCart] = useState({});
+    const [cartList, setCartList] = useState([]);
     const [order, setOrder] = useState({});
     const [categories, setCategories] = useState([]);
 
-    const fetchProducts = () => {
-        fetch("http://127.0.0.1:8000/api/products")
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    setProducts(result.data);
-                    },
-                (error) => {
-                    console.log('Error');
-                }
-                )
-    }
+    const fetchProducts = async () => {
+        const response = await fetch("http://127.0.0.1:8000/api/products");
+        const json = await response.json();
+        setProducts(json.data);
+    };
 
     const fetchCategories = async () => {
-        const { data: categories } = await commerce.categories.list();
-        setCategories(categories);
+        const response = await fetch("http://127.0.0.1:8000/api/category");
+        const json = await response.json();
+        setCategories(json.data);
     };
 
     const fetchCart = async () => {
-        setCart(await commerce.cart.retrieve());
+        const response = await fetch("http://127.0.0.1:8000/api/cart");
+        const json = await response.json();
+        setCart(json);
+        await fetchCartList();
     };
 
-    const refreshCart = async () => {
-        const newCart = await commerce.cart.refresh();
-        setCart(newCart);
+    const fetchCartList = async () => {
+        const response = await fetch("http://127.0.0.1:8000/api/cart");
+        const json = await response.json();
+        const prodList = { ...json };
+        delete prodList.total_quantity;
+        delete prodList.total_amount;
+        delete prodList[0];
+        const prodListArray = Object.values(prodList);
+        setCartList(prodListArray);
     };
 
-    const handleAddToCart = async (productId, quantity, secondClickFlag) => {
+    const handleAddToCart = async (prodId, quan, secondClickFlag) => {
         if (!secondClickFlag) {
-            const { cart } = await commerce.cart.add(productId, quantity);
-            console.log(cart);
-            setCart(cart);
+            const addNew = {id: prodId, qty: quan};
+            await fetch("http://127.0.0.1:8000/api/cart/add",
+                {
+                    method: 'POST',
+                    headers: {'Accept': 'application/json', "Content-Type": "application/json"},
+                    body: JSON.stringify(addNew)
+                });
+            await fetchCart();
         }
     };
 
-    const handleUpdateCartQty = async (productId, quantity) => {
-        const { cart } = await commerce.cart.update(productId, { quantity });
-        setCart(cart);
+    const handleUpdateCart = async (prodId, quan) => {
+        const updateNew = {id: prodId, qty: quan};
+        await fetch("http://127.0.0.1:8000/api/cart/update",
+            {
+                method: 'POST',
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(updateNew)
+            });
+        await fetchCart();
     };
 
-    const handleRemoveFromCart = async (productId) => {
-        const { cart } = await commerce.cart.remove(productId);
-        setCart(cart);
-    };
-
-    const handleEmptyCart = async () => {
-        const response = await commerce.cart.empty();
-        setCart(response.cart);
+    const handleRemoveFromCart = async (prodId) => {
+        const removeNew = {id: prodId};
+        await fetch("http://127.0.0.1:8000/api/cart/delete",
+            {
+                method: 'POST',
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(removeNew)
+            });
+        await fetchCart();
     };
 
     const handleCaptureCheckout = async (newOrder) => {
@@ -71,23 +84,22 @@ const Main = () => {
 
     useEffect(() => {
         fetchProducts();
-        fetchCategories();
         fetchCart();
+        fetchCategories();
+        fetchCartList();
     }, []);
 
     return (
         <Router>
             <div className="pageContent">
-                <Navbar totalItems={cart.total_items} />
+                <Navbar totalItems={cart.total_quantity} />
                 <Switch>
                     <Route exact path="/">
                         <Products products={products} categories={categories} onAddToCart={handleAddToCart} />
                     </Route>
                     <Route exact path="/cart">
                         <Cart
-                            cart={cart}
-                            handleUpdateCartQty={handleUpdateCartQty}
-                            handleRemoveFromCart={handleRemoveFromCart}
+                            cart={cart} cartList={cartList} handleUpdateCart={handleUpdateCart} handleRemoveFromCart={handleRemoveFromCart}
                         />
                     </Route>
                     <Route exact path="/product/:id">
