@@ -1,12 +1,22 @@
 import React from 'react';
 import { Grid, Slider, Typography, List, ListItem, ListItemText, ListItemIcon, Checkbox } from '@material-ui/core/';
-import { Pagination } from '@material-ui/lab';
+import { Pagination} from '@material-ui/lab';
 
 import Product from './Product/Product';
 
 import './styles.sass';
 
-const Products = ({ products, categories, onAddToCart }) => {
+const Products = ({ products, categories, onAddToCart, totalProducts, productsPerPage, openPage, paginate }) => {
+
+    const handleChange = (e, p) => {
+        paginate(p);
+    };
+
+    const pageNumbers = [];
+
+    for (let i = 1; i <= Math.ceil(totalProducts / productsPerPage); i++) {
+        pageNumbers.push(i);
+    }
 
     return (
         <main>
@@ -34,7 +44,7 @@ const Products = ({ products, categories, onAddToCart }) => {
                         </List>
                     </div>
                 </div>
-                <Grid className="items" container spacing={3}>
+                <Grid className="items" container spacing={1}>
                     {products.map((product) => (
                         <Grid item key={product.id} xs={12} sm={6} md={4} lg={3}>
                             <Product product={product} onAddToCart={onAddToCart} />
@@ -42,9 +52,9 @@ const Products = ({ products, categories, onAddToCart }) => {
                     ))}
                 </Grid>
             </div>
-            <Pagination size="large" color="secondary" count={5} />
+            <Pagination size="large" color="secondary" onChange={handleChange} page={openPage} count={pageNumbers.length} />
         </main>
     );
-}
+};
 
 export default Products;

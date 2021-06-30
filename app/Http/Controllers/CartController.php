@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -30,13 +31,12 @@ class CartController extends Controller
     public function add(Request $request)
     {
         $product = Product::where('id', $request->id)->first();
-
+        $category = Category::where('id', $product->category_id)->first();
         if(!isset($_COOKIE['cart_id']))
         {
             $_COOKIE['cart_id'] = uniqid();
             setcookie('cart_id', uniqid(), 0);
         }
-
         $cart_id = $_COOKIE['cart_id'];
         $cart = \Cart::session($cart_id);
 
@@ -44,9 +44,10 @@ class CartController extends Controller
             'id' => $product->id,
             'name' => $product->name,
             'price' => $product->price,
-            'quantity' =>  $request->qty,
+            'quantity' => $request->qty,
             'attributes' => [
                 'category_id' => $product->category_id,
+                'category_name' => $category->name,
                 'vendor_code' => $product->vendor_code,
                 'image' => $product->image
             ]

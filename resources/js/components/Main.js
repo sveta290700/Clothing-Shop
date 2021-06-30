@@ -9,8 +9,9 @@ const Main = () => {
     const [products, setProducts] = useState([]);
     const [cart, setCart] = useState({});
     const [cartList, setCartList] = useState([]);
-    const [order, setOrder] = useState({});
     const [categories, setCategories] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [productsPerPage] = useState(8);
 
     const fetchProducts = async () => {
         const response = await fetch("http://127.0.0.1:8000/api/products");
@@ -84,6 +85,7 @@ const Main = () => {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(newOrder)
             });
+        await fetchCart();
     };
 
     useEffect(() => {
@@ -93,13 +95,20 @@ const Main = () => {
         fetchCartList();
     }, []);
 
+    const indexOfLastProduct = currentPage * productsPerPage;
+    const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+    const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
+
+    const paginate = pageNumber => setCurrentPage(pageNumber);
+
     return (
         <Router>
             <div className="pageContent">
                 <Navbar totalItems={cart.total_quantity} />
                 <Switch>
                     <Route exact path="/">
-                        <Products products={products} categories={categories} onAddToCart={handleAddToCart} />
+                        <Products products={currentProducts} categories={categories} onAddToCart={handleAddToCart}
+                                  totalProducts={products.length} productsPerPage={productsPerPage} openPage={currentPage} paginate={paginate}/>
                     </Route>
                     <Route exact path="/cart">
                         <Cart
@@ -110,7 +119,7 @@ const Main = () => {
                         <ProductPage onAddToCart={handleAddToCart} />
                     </Route>
                     <Route exact path="/checkout">
-                        <Checkout cart={cart} cartList={cartList} order={order} onCaptureCheckout={handleCaptureCheckout} />
+                        <Checkout cart={cart} cartList={cartList} onCaptureCheckout={handleCaptureCheckout} />
                     </Route>
                 </Switch>
             </div>

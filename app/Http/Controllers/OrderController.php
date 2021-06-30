@@ -26,6 +26,7 @@ class OrderController extends Controller
                     'product_id' => $item->id,
                 ]);
             }
+            $cart->clear();
             return json_encode(Order::find($id_orders));
         }
         return false;

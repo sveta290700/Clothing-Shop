@@ -29,7 +29,7 @@ const CartItem = ({ item, onUpdateCart, onRemoveFromCart }) => {
                         {itemPriceTotal(item.price, item.quantity)}.00
                     </Typography>
                     <Typography className="productCardCategory" variant="body2">
-                        {item.attributes.category_id}
+                        {item.attributes.category_name}
                     </Typography>
                 </CardContent>
                 <CardActions className="cardCartActions">
