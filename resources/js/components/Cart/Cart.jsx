@@ -19,15 +19,17 @@ const Cart = ({ cart, cartList, handleUpdateCart, handleRemoveFromCart }) => {
             <Grid container spacing={3}>
                 {cartList.map((item) => (
                     <Grid item xs={12} sm={6} md={4} lg={3} key={item.id}>
-                        <CartItem item={item} onUpdateCart={handleUpdateCart} onRemoveFromCart={handleRemoveFromCart} />
+                        <CartItem item={item} onUpdateCart={handleUpdateCart} onRemoveFromCart={handleRemoveFromCart}/>
                     </Grid>
                 ))}
             </Grid>
             <div className="cartDetails">
                 <Typography variant="h4">Сумма: {cart.total_amount}.00</Typography>
                 <div>
-                    <Button className="backButton" component={Link} to="/" size="large" type="button" variant="contained">Назад</Button>
-                    <Button className="checkoutButton" component={Link} to="/checkout" size="large" type="button" variant="contained">Оформить заказ</Button>
+                    <Button className="backButton" component={Link} to="/" size="large" type="button"
+                            variant="contained">Назад</Button>
+                    <Button className="checkoutButton" component={Link} to="/checkout" size="large" type="button"
+                            variant="contained">Оформить заказ</Button>
                 </div>
             </div>
         </>
@@ -40,9 +42,10 @@ const Cart = ({ cart, cartList, handleUpdateCart, handleRemoveFromCart }) => {
             <Typography className="cartTitle" variant="h3">
                 Корзина
             </Typography>
-            { !cart.total_quantity ? <EmptyCart /> : <FilledCart />}
+            {!cart.total_quantity ? <EmptyCart/> : <FilledCart/>}
         </Container>
     );
+
 };
 
 export default Cart;

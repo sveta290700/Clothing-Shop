@@ -8,7 +8,7 @@ import './styles.sass';
 
 const steps = ['Ввод данных', 'Подтверждение заказа'];
 
-const Checkout = ({ cart, onCaptureCheckout }) => {
+const Checkout = ({ cart, cartList, onCaptureCheckout }) => {
 
     const [activeStep, setActiveStep] = useState(0);
     const [shippingData, setShippingData] = useState({});
@@ -17,7 +17,6 @@ const Checkout = ({ cart, onCaptureCheckout }) => {
     const backStep = () => setActiveStep((prevActiveStep) => prevActiveStep - 1);
 
     const next = (data) => {
-        console.log(data);
         setShippingData(data);
         nextStep();
     };
@@ -32,7 +31,7 @@ const Checkout = ({ cart, onCaptureCheckout }) => {
 
     const Form = () => (activeStep === 0
         ? <ShippingForm nextStep={nextStep} setShippingData={setShippingData} next={next}/>
-        : <ConfirmationForm cart={cart} shippingData={shippingData} nextStep={nextStep} backStep={backStep} onCaptureCheckout={onCaptureCheckout} />);
+        : <ConfirmationForm cart={cart} cartList={cartList} shippingData={shippingData} nextStep={nextStep} backStep={backStep} onCaptureCheckout={onCaptureCheckout} />);
 
     return (
         <>

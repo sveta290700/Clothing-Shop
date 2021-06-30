@@ -48,7 +48,7 @@ const Main = () => {
             await fetch("http://127.0.0.1:8000/api/cart/add",
                 {
                     method: 'POST',
-                    headers: {'Accept': 'application/json', "Content-Type": "application/json"},
+                    headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(addNew)
                 });
             await fetchCart();
@@ -78,8 +78,12 @@ const Main = () => {
     };
 
     const handleCaptureCheckout = async (newOrder) => {
-        console.log(newOrder);
-        handleEmptyCart();
+        await fetch("http://127.0.0.1:8000/api/cart/submit",
+            {
+                method: 'POST',
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(newOrder)
+            });
     };
 
     useEffect(() => {
@@ -106,7 +110,7 @@ const Main = () => {
                         <ProductPage onAddToCart={handleAddToCart} />
                     </Route>
                     <Route exact path="/checkout">
-                        <Checkout cart={cart} order={order} onCaptureCheckout={handleCaptureCheckout} />
+                        <Checkout cart={cart} cartList={cartList} order={order} onCaptureCheckout={handleCaptureCheckout} />
                     </Route>
                 </Switch>
             </div>

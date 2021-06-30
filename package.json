@@ -15,6 +15,7 @@
         "@material-ui/icons": "^4.11.2",
         "axios": "^0.21",
         "bootstrap": "^4.6.0",
+        "emailjs-com": "^3.1.0",
         "jquery": "^3.6",
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
@@ -29,8 +30,6 @@
         "sass-loader": "^11.0.1"
     },
     "dependencies": {
-        "@chec/commerce.js": "^2.7.1",
-        "@material-ui/lab": "*",
-        "react-addons-create-fragment": "^15.6.2"
+        "@material-ui/lab": "*"
     }
 }

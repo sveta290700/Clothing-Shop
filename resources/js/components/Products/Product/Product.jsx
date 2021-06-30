@@ -10,7 +10,7 @@ const Product = ({ product, onAddToCart }) => {
 
     const [buttonState, setButtonState] = useState({ text: "В корзину", clickCount: 0, secondClickFlag: false });
 
-    function goToCart() {
+    const goToCart = () => {
         if (buttonState.clickCount > 0 && buttonState.secondClickFlag === true)
             history.push("/cart");
     }

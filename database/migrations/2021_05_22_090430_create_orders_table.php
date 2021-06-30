@@ -19,7 +19,7 @@ class CreateOrdersTable extends Migration
             $table->string('phone_number', 20);
             $table->string('email', 100);
             $table->text('address');
-            $table->text('comments');
+            $table->text('comments')->nullable();
             $table->decimal('cost', $precision = 8, $scale = 2);
             $table->timestamps();
         });
