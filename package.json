@@ -30,6 +30,7 @@
         "sass-loader": "^11.0.1"
     },
     "dependencies": {
-        "@material-ui/lab": "*"
+        "@material-ui/lab": "*",
+        "material-ui-search-bar": "^1.0.0"
     }
 }

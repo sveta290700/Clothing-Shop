@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './styles.sass';
 
 const Main = () => {
+
     const [products, setProducts] = useState([]);
     const [cart, setCart] = useState({});
     const [cartList, setCartList] = useState([]);
@@ -88,7 +89,7 @@ const Main = () => {
         await fetchCart();
     };
 
-    const filterByCategory = async (idx) => {
+    const filterByCategory = async (idx, radioValue) => {
         if (idx.length !== 0) {
             let filtered = [];
             for (let i = 0; i < idx.length; i++) {
@@ -96,7 +97,29 @@ const Main = () => {
                 const json = await response.json();
                 filtered = filtered.concat(json.data);
             }
-            setProducts(filtered);
+            if (radioValue !== 'empty')
+            {
+                switch (radioValue) {
+                    case 'descPrice': {
+                        sortFilteredProducts(filtered, false, true, false);
+                        break;
+                    }
+                    case 'ascPrice': {
+                        sortFilteredProducts(filtered, false, true, false);
+                        break;
+                    }
+                    case 'descName': {
+                        sortFilteredProducts(filtered, true, false, true);
+                        break;
+                    }
+                    case 'ascName': {
+                        sortFilteredProducts(filtered, false, false, true);
+                        break;
+                    }
+                }
+            }
+            else
+                setProducts(filtered);
         }
         else
             await fetchProducts();
@@ -115,6 +138,70 @@ const Main = () => {
 
     const paginate = pageNumber => setCurrentPage(pageNumber);
 
+    function sortPrice(a, b) {
+        return a.price - b.price;
+    }
+
+    function sortName(a, b) {
+        return a.name.localeCompare(b.name);
+    }
+
+    const sortProducts = (desc, priceSort, nameSort) => {
+        const sortedProducts = products.slice();
+        if (priceSort) {
+            if (desc) {
+                sortedProducts.sort(sortPrice).reverse();
+                setProducts(sortedProducts);
+            }
+            else
+            {
+                sortedProducts.sort(sortPrice)
+                setProducts(sortedProducts);
+            }
+        }
+        else if (nameSort) {
+            if (desc) {
+                sortedProducts.sort(sortName).reverse();
+                setProducts(sortedProducts);
+            }
+            else
+            {
+                sortedProducts.sort(sortName);
+                setProducts(sortedProducts);
+            }
+        }
+        else
+            console.log('Incorrect function parameters')
+    };
+
+    const sortFilteredProducts = (filtered, desc, priceSort, nameSort) => {
+        const sortedProducts = filtered.slice();
+        if (priceSort) {
+            if (desc) {
+                sortedProducts.sort(sortPrice).reverse();
+                setProducts(sortedProducts);
+            }
+            else
+            {
+                sortedProducts.sort(sortPrice)
+                setProducts(sortedProducts);
+            }
+        }
+        else if (nameSort) {
+            if (desc) {
+                sortedProducts.sort(sortName).reverse();
+                setProducts(sortedProducts);
+            }
+            else
+            {
+                sortedProducts.sort(sortName);
+                setProducts(sortedProducts);
+            }
+        }
+        else
+            console.log('Incorrect function parameters')
+    };
+
     return (
         <Router>
             <div className="pageContent">
@@ -123,7 +210,7 @@ const Main = () => {
                     <Route exact path="/">
                         <Products products={currentProducts} categories={categories} onAddToCart={handleAddToCart}
                                   totalProducts={products.length} productsPerPage={productsPerPage}
-                                  openPage={currentPage} paginate={paginate} filterByCategory={filterByCategory}/>
+                                  openPage={currentPage} paginate={paginate} filterByCategory={filterByCategory} sortProducts={sortProducts}/>
                     </Route>
                     <Route exact path="/cart">
                         <Cart

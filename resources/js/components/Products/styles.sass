@@ -1,8 +1,9 @@
-$primaryColor: black
-$secondaryColor: #f50057
+$buttonTextColor: white
+$buttonColorPrimary: #f50057
+$buttonColorSecondary: black
 
 .content
-    padding-top: 68.25px
+    padding-top: 69px
     max-width: 100%
     display: flex
     margin: auto
@@ -11,7 +12,7 @@ $secondaryColor: #f50057
         max-width: 100%
 
 .MuiPagination-root
-    padding-bottom: 5px
+    padding: 0.5vh
     justify-content: center
     display: flex
 
@@ -20,29 +21,103 @@ $secondaryColor: #f50057
         font-weight: bold
 
 .items
-    padding-right: 5px
+    padding-right: 3px
+    max-width: 1170px
+    min-width: 295px
 
 .filters
-    min-width: 666px
-    max-width: 666px
+    min-width: 730px
+    max-width: 730px
     margin: auto
-    padding: 40px 10% 40px 10%
     display: flex
-    flex-direction: column
+    flex-direction: row
     .categoryFilter
         min-width: 400px
         min-height: 100%
-        padding: 10%
+        padding: 5%
         display: flex
         flex-direction: column
         justify-content: left
         .categoryLabel
             cursor: default
         .checkbox
-            color: $secondaryColor
+            color: $buttonColorPrimary
         .categoryItemLabel
             font-size: 18px
         .categoryFilterLabel
             font-weight: bold
             width: 300px
             cursor: default
+
+.MuiTypography-root.priceFilterLabel.MuiTypography-h6
+    font-weight: bold
+    width: 300px
+    cursor: default
+
+.sortersSearchPriceFilter
+    display: flex
+    flex-direction: column
+    justify-content: space-evenly
+    width: 300px
+
+.priceFilterLabel
+    font-weight: bold
+    width: 300px
+    padding-bottom: 20%
+    cursor: default
+    margin-bottom: 5px
+
+.MuiSlider-root.MuiSlider-colorPrimary.priceSlider
+    color: $buttonColorPrimary
+
+.MuiButtonBase-root.MuiButton-root.MuiButton-contained.dropSortsButton
+    width: 200px
+    color: $buttonTextColor
+    font-weight: bold
+    background-color: $buttonColorPrimary
+    &:hover
+        background-color: $buttonColorSecondary
+
+.MuiButtonBase-root.MuiButton-root.MuiButton-contained.applyPriceFiltersButton
+    margin: 5px
+    width: 100px
+    color: $buttonTextColor
+    font-weight: bold
+    background-color: $buttonColorPrimary
+    &:hover
+        background-color: $buttonColorSecondary
+
+.MuiButtonBase-root.MuiButton-root.MuiButton-contained.dropPriceFiltersButton
+    margin: 5px
+    width: 100px
+    color: $buttonTextColor
+    font-weight: bold
+    background-color: $buttonColorPrimary
+    &:hover
+        background-color: $buttonColorSecondary
+
+.sorters
+    width: 70%
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+
+.MuiTypography-root.sortersLabel.MuiTypography-h6
+    font-weight: bold
+    width: 300px
+    cursor: default
+
+.priceFilterButtons
+    display: flex
+    flex-direction: row
+    align-items: center
+    justify-content: space-evenly
+
+.MuiTypography-root.searchLabel.MuiTypography-h6
+    margin-bottom: 5px
+    font-weight: bold
+    width: 300px
+    cursor: default
+
+.searchBar
+    width: 300px
