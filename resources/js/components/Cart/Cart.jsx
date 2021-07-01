@@ -26,7 +26,7 @@ const Cart = ({ cart, cartList, handleUpdateCart, handleRemoveFromCart, refreshP
             <div className="cartDetails">
                 <Typography variant="h4">Сумма: {cart.total_amount}.00</Typography>
                 <div>
-                    <Button className="backButton" component={Link} to="/" size="large" type="button"
+                    <Button className="backFromCartButton" component={Link} to="/" size="large" type="button"
                             variant="contained">Назад</Button>
                     <Button className="checkoutButton" component={Link} to="/checkout" size="large" type="button"
                             variant="contained">Оформить заказ</Button>

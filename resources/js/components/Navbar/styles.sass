@@ -4,23 +4,19 @@ $titleColor: black
 $badgeColor: #f50057
 $badgeTextColor: white
 
-.appBar
+.MuiPaper-root.MuiAppBar-root.MuiAppBar-positionFixed.MuiAppBar-colorPrimary.appBar.mui-fixed.MuiPaper-elevation4
     border-bottom: 1px solid rgba(0, 0, 0, 0.12)
     margin-bottom: 10px
-    &.MuiAppBar-colorPrimary
-        background-color: $appBarColor
+    background-color: $appBarColor
 
-.title
+.MuiTypography-root.title.MuiTypography-h6
     flex-grow: 1
     align-items: center
     display: flex
     color: $titleColor
     text-decoration: none
     padding: 5px
-
-.MuiTypography-root.title.MuiTypography-h6
     cursor: default
-    text-decoration: none
 
 .image
     padding-right: 10px
@@ -32,6 +28,5 @@ $badgeTextColor: white
         background-color: $badgeColor
         color: $badgeTextColor
 
-.cartIcon
-    &.MuiIconButton-root
-        color: $cartColor
+.MuiButtonBase-root.MuiIconButton-root.cartIcon
+    color: $cartColor

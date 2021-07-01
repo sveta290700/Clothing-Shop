@@ -7,23 +7,6 @@ $buttonColorSecondary: black
     max-width: 100%
     display: flex
     margin: auto
-    .items
-        margin: auto
-        max-width: 100%
-
-.MuiPagination-root
-    padding: 0.5vh
-    justify-content: center
-    display: flex
-
-.MuiPaginationItem-root
-    &:last-child
-        font-weight: bold
-
-.items
-    padding-right: 3px
-    max-width: 1170px
-    min-width: 295px
 
 .filters
     min-width: 730px
@@ -31,34 +14,67 @@ $buttonColorSecondary: black
     margin: auto
     display: flex
     flex-direction: row
-    .categoryFilter
-        min-width: 400px
-        min-height: 100%
-        padding: 5%
-        display: flex
-        flex-direction: column
-        justify-content: left
-        .categoryLabel
-            cursor: default
-        .checkbox
-            color: $buttonColorPrimary
-        .categoryItemLabel
-            font-size: 18px
-        .categoryFilterLabel
-            font-weight: bold
-            width: 300px
-            cursor: default
 
-.MuiTypography-root.priceFilterLabel.MuiTypography-h6
+.categoryFilter
+    min-width: 400px
+    min-height: 100%
+    padding: 5%
+    display: flex
+    flex-direction: column
+    justify-content: left
+
+.MuiTypography-root.categoryFilterLabel.MuiTypography-h6
     font-weight: bold
     width: 300px
     cursor: default
+
+.MuiListItem-root.categoryLabel.MuiListItem-gutters
+    cursor: default
+
+.MuiButtonBase-root.MuiIconButton-root.PrivateSwitchBase-root-8.MuiCheckbox-root.MuiCheckbox-colorSecondary.checkbox.MuiIconButton-colorSecondary.MuiIconButton-edgeStart
+    color: $buttonColorPrimary
+
+.MuiListItemText-root.categoryItemLabel
+    font-size: 18px
 
 .sortersSearchPriceFilter
     display: flex
     flex-direction: column
     justify-content: space-evenly
     width: 300px
+
+.MuiTypography-root.searchLabel.MuiTypography-h6
+    margin-bottom: 5px
+    font-weight: bold
+    width: 300px
+    cursor: default
+
+.searchBar
+    width: 300px
+
+.sorters
+    width: 70%
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+
+.MuiTypography-root.sortersLabel.MuiTypography-h6
+    font-weight: bold
+    width: 300px
+    cursor: default
+
+.MuiButtonBase-root.MuiButton-root.MuiButton-contained.dropSortsButton
+    width: 200px
+    color: $buttonTextColor
+    font-weight: bold
+    background-color: $buttonColorPrimary
+    &:hover
+        background-color: $buttonColorSecondary
+
+.MuiTypography-root.priceFilterLabel.MuiTypography-h6
+    font-weight: bold
+    width: 300px
+    cursor: default
 
 .priceFilterLabel
     font-weight: bold
@@ -70,13 +86,11 @@ $buttonColorSecondary: black
 .MuiSlider-root.MuiSlider-colorPrimary.priceSlider
     color: $buttonColorPrimary
 
-.MuiButtonBase-root.MuiButton-root.MuiButton-contained.dropSortsButton
-    width: 200px
-    color: $buttonTextColor
-    font-weight: bold
-    background-color: $buttonColorPrimary
-    &:hover
-        background-color: $buttonColorSecondary
+.priceFilterButtons
+    display: flex
+    flex-direction: row
+    align-items: center
+    justify-content: space-evenly
 
 .MuiButtonBase-root.MuiButton-root.MuiButton-contained.applyPriceFiltersButton
     margin: 5px
@@ -96,28 +110,17 @@ $buttonColorSecondary: black
     &:hover
         background-color: $buttonColorSecondary
 
-.sorters
-    width: 70%
+.MuiGrid-root.items.MuiGrid-container.MuiGrid-spacing-xs-1
+    padding-right: 3px
+    min-width: 295px
+    margin: auto
+    max-width: 100%
+
+.MuiPagination-root
+    padding: 0.5vh
+    justify-content: center
     display: flex
-    flex-direction: column
-    justify-content: space-between
 
-.MuiTypography-root.sortersLabel.MuiTypography-h6
-    font-weight: bold
-    width: 300px
-    cursor: default
-
-.priceFilterButtons
-    display: flex
-    flex-direction: row
-    align-items: center
-    justify-content: space-evenly
-
-.MuiTypography-root.searchLabel.MuiTypography-h6
-    margin-bottom: 5px
-    font-weight: bold
-    width: 300px
-    cursor: default
-
-.searchBar
-    width: 300px
+.MuiPaginationItem-root
+    &:last-child
+        font-weight: bold

@@ -16,24 +16,24 @@ $buttonColorSecondary: black
     justify-content: space-between
     padding-top: 10px
 
-.toCartButton, .backButton
+.MuiButtonBase-root.MuiButton-root.MuiButton-outlined.toCartButton, .MuiButtonBase-root.MuiButton-root.MuiButton-outlined.backToShippingFormButton
     width: 200px
-    &:first-child
-        color: $buttonTextColor
-        margin-right: 20px
-        font-weight: bold
-        background-color: $buttonColorPrimary
-        &:hover
-            background-color: $buttonColorSecondary
+    color: $buttonTextColor
+    margin-right: 20px
+    font-weight: bold
+    background-color: $buttonColorPrimary
+    &:hover
+        background-color: $buttonColorSecondary
 
-.nextButton, .submitOrder
+.MuiButtonBase-root.MuiButton-root.MuiButton-outlined.nextButton, .MuiButtonBase-root.MuiButton-root.MuiButton-outlined.submitOrder
     width: 200px
-    &:last-child
-        color: $buttonTextColor
-        font-weight: bold
-        background-color: $buttonColorPrimary
-        &:hover
-            background-color: $buttonColorSecondary
+    color: $buttonTextColor
+    font-weight: bold
+    background-color: $buttonColorPrimary
+    &:hover
+        background-color: $buttonColorSecondary
+    &.Mui-disabled.Mui-disabled
+        color: rgba(0, 0, 0, 0.26)
 
 .MuiListItem-root.listItem
     padding: 10px 0

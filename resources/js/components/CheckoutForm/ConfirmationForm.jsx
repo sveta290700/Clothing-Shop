@@ -64,7 +64,7 @@ const ConfirmationForm = ({ cart, cartList, shippingData, backStep, onCaptureChe
                     label="Соглашаюсь на обработку данных"
                     labelPlacement="end" />
                 <div className="buttons">
-                    <Button className="backButton" type="button" variant="outlined" onClick={backStep}>Назад</Button>
+                    <Button className="backToShippingFormButton" type="button" variant="outlined" onClick={backStep}>Назад</Button>
                     <form onSubmit={(e) => handleSubmit(e)}>
                         <input type="hidden" name="lastName" value={shippingData.lastName}/>
                         <input type="hidden" name="firstName" value={shippingData.firstName}/>

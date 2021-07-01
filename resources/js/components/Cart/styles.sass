@@ -3,37 +3,12 @@ $buttonTextColor: white
 $buttonColorPrimary: #f50057
 $buttonColorSecondary: black
 
-.cartTitle
+.MuiTypography-root.cartTitle.MuiTypography-h3
     padding-top: 100px
     padding-bottom: 2vh
 
-.items
+.MuiGrid-root.items.MuiGrid-container.MuiGrid-spacing-xs-1
     min-width: 415px
-
-.backButton
-    width: 200px
-    &:first-child
-        color: $buttonTextColor
-        margin-right: 20px
-        font-weight: bold
-        background-color: $buttonColorPrimary
-        &:hover
-            background-color: $buttonColorSecondary
-
-.checkoutButton
-    width: 200px
-    &:last-child
-        color: $buttonTextColor
-        font-weight: bold
-        background-color: $buttonColorPrimary
-        &:hover
-            background-color: $buttonColorSecondary
-
-.link
-    text-decoration: none
-    color: $textColorPrimary
-    &:hover
-        text-decoration: none
 
 .cartDetails
     display: flex
@@ -41,3 +16,26 @@ $buttonColorSecondary: black
     padding-bottom: 4vh
     width: 100%
     justify-content: space-between
+
+.MuiButtonBase-root.MuiButton-root.MuiButton-contained.backFromCartButton.MuiButton-containedSizeLarge.MuiButton-sizeLarge
+    width: 200px
+    color: $buttonTextColor
+    margin-right: 20px
+    font-weight: bold
+    background-color: $buttonColorPrimary
+    &:hover
+        background-color: $buttonColorSecondary
+
+.MuiButtonBase-root.MuiButton-root.MuiButton-contained.checkoutButton.MuiButton-containedSizeLarge.MuiButton-sizeLarge
+    width: 200px
+    color: $buttonTextColor
+    font-weight: bold
+    background-color: $buttonColorPrimary
+    &:hover
+        background-color: $buttonColorSecondary
+
+.link
+    text-decoration: none
+    color: $textColorPrimary
+    &:hover
+        text-decoration: none

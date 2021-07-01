@@ -1,10 +1,9 @@
 $primaryTextColor: black
-$secondaryTextColor: gray
 $buttonTextColor: white
 $buttonColorPrimary: #f50057
 $buttonColorSecondary: black
 
-.productCardTitle
+.MuiTypography-root.productCardTitle.MuiTypography-h3
     padding-top: 100px
     padding-bottom: 2vh
     cursor: default
@@ -14,7 +13,11 @@ $buttonColorSecondary: black
     flex-direction: row
     cursor: default
 
-.productCard
+.MuiPaper-root.productImage.MuiPaper-elevation1.MuiPaper-rounded
+    height: 400px
+    width: 267px
+
+.MuiPaper-root.MuiCard-root.productCard.MuiPaper-elevation1.MuiPaper-rounded
     margin: auto
     height: 100%
     width: 100%
@@ -22,37 +25,39 @@ $buttonColorSecondary: black
     flex-direction: column
     justify-content: space-between
 
-.productImage
-    height: 400px
-    width: 267px
-
-.productCardActions
-    display: flex
-    justify-content: flex-end
-
 .productCardContent
     display: flex
     flex-wrap: wrap
     justify-content: space-between
 
-.productCardName
-    &:first-child
-        font-size: 13pt
-        margin-bottom: 0.35em
-        text-decoration: none
-        color: $primaryTextColor
+.MuiTypography-root.productCardName.MuiTypography-body1
+    font-size: 13pt
+    margin-bottom: 0.35em
+    color: $primaryTextColor
 
-.productCardPrice
-    &:last-child
-        font-size: 13pt
-        margin-bottom: 0.35em
-        color: $primaryTextColor
+.MuiTypography-root.productCardPrice.MuiTypography-body1
+    font-size: 13pt
+    margin-bottom: 0.35em
+    color: $primaryTextColor
 
-.addToCartButton
-    &:first-child
-        font-weight: bold
-        border-radius: 5px
-        color: $buttonTextColor
+.MuiTypography-root.productCardCategory.MuiTypography-body1
+    font-size: 13pt
+    margin-bottom: 0.35em
+    color: $primaryTextColor
+
+.MuiTypography-root.productCardDescription.MuiTypography-body1
+    font-size: 13pt
+    margin-bottom: 0.35em
+    color: $primaryTextColor
+
+.MuiTypography-root.productCardCharacteristics.MuiTypography-body1
+    font-size: 13pt
+    margin-bottom: 0.35em
+    color: $primaryTextColor
+
+.MuiCardActions-root.productCardActions
+    display: flex
+    justify-content: flex-end
 
 .back
     padding-top: 4vh
@@ -60,13 +65,12 @@ $buttonColorSecondary: black
     display: flex
     justify-content: flex-end
 
-.backButton
-    &:last-child
-        font-weight: bold
-        border-radius: 5px
-        color: $buttonTextColor
-        background-color: $buttonColorPrimary
-        border-color: $buttonColorPrimary
-        &:hover
-            background-color: $buttonColorSecondary
-            border-color: $buttonColorSecondary
+.MuiButtonBase-root.MuiButton-root.MuiButton-outlined.backButton
+    font-weight: bold
+    border-radius: 5px
+    color: $buttonTextColor
+    background-color: $buttonColorPrimary
+    border-color: $buttonColorPrimary
+    &:hover
+        background-color: $buttonColorSecondary
+        border-color: $buttonColorSecondary

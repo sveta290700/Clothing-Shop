@@ -18,15 +18,13 @@ const Product = ({ product, onAddToCart }) => {
     return (
         <Card className="root">
             <CardMedia className="media" image={product.image} title={product.name} component={Link} to={`product/${product.id}`} />
-            <CardContent>
-                <div className="cardContent">
+            <CardContent className="cardContent">
                     <Typography className="productName" component={Link} to={`product/${product.id}`}>
                         {product.name}
                     </Typography>
                     <Typography className="productPrice">
                         {product.price}
                     </Typography>
-                </div>
                 <Typography className="productCategory" variant="body2">
                     {product.category_name}
                 </Typography>

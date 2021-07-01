@@ -55,13 +55,13 @@ const ProductPage = ({ onAddToCart, refreshProducts }) => {
                             {product.price}
                         </Typography>
                     </div>
-                    <Typography gutterBottom>
+                    <Typography className="productCardCategory">
                         Категория товара: {product.category_name}
                     </Typography>
-                    <Typography gutterBottom>
+                    <Typography className="productCardDescription">
                         {product.description}
                     </Typography>
-                    <Typography gutterBottom>
+                    <Typography className="productCardCharacteristics">
                         {product.characteristics}
                     </Typography>
                 </CardContent>

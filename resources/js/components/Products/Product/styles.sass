@@ -4,51 +4,46 @@ $buttonTextColor: white
 $buttonColorPrimary: #f50057
 $buttonColorSecondary: black
 
-.root
-    &:last-child
-        min-height: 400px
-        display: flex
-        flex-direction: column
-        justify-content: space-between
+.MuiPaper-root.MuiCard-root.root.MuiPaper-elevation1.MuiPaper-rounded
+    min-height: 400px
+    max-height: 400px
+    display: flex
+    flex-direction: column
+    justify-content: space-between
 
-.media
+.MuiCardMedia-root.media
     height: 0
     padding-top: 70%
 
-.cardActions
-    justify-content: flex-end
-
-.cardContent
+.MuiCardContent-root.cardContent
     display: flex
     flex-wrap: wrap
     justify-content: space-between
     flex-direction: column
 
-.productName
-    &:first-child
-        font-size: 13pt
-        margin-bottom: 0.35em
-        text-decoration: none
-        color: $primaryTextColor
+.MuiTypography-root.productName.MuiTypography-body1
+    font-size: 13pt
+    margin-bottom: 0.35em
+    text-decoration: none
+    color: $primaryTextColor
 
-.productPrice
-    &:last-child
-        font-size: 13pt
-        margin-bottom: 0.35em
-        color: $primaryTextColor
-        cursor: default
+.MuiTypography-root.productPrice.MuiTypography-body1
+    font-size: 13pt
+    margin-bottom: 0.35em
+    color: $primaryTextColor
+    cursor: default
 
-.productCategory
+.MuiTypography-root.productCategory.MuiTypography-body2
     color: $secondaryTextColor
     cursor: default
 
-.addToCartButton
-    &:first-child
-        font-weight: bold
-        border-radius: 5px
-        color: $buttonTextColor
+.MuiCardActions-root.cardActions.MuiCardActions-spacing
+    justify-content: flex-end
 
 .MuiButtonBase-root.MuiButton-root.MuiButton-outlined.addToCartButton.MuiButton-outlinedPrimary
+    font-weight: bold
+    border-radius: 5px
+    color: $buttonTextColor
     background-color: $buttonColorPrimary
     border-color: $buttonColorPrimary
     &:hover
@@ -56,6 +51,9 @@ $buttonColorSecondary: black
         border-color: $buttonColorSecondary
 
 .MuiButtonBase-root.MuiButton-root.MuiButton-outlined.addToCartButton.MuiButton-outlinedSecondary
+    font-weight: bold
+    border-radius: 5px
+    color: $buttonTextColor
     background-color: $buttonColorSecondary
     border-color: $buttonColorSecondary
     &:hover

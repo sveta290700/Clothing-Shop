@@ -25,7 +25,7 @@ const CartItem = ({ item, onUpdateCart, onRemoveFromCart }) => {
                     <Typography className="productCardName">
                         {item.name}
                     </Typography>
-                    <Typography className="productCardPrice" gutterBottom>
+                    <Typography className="productCardPrice">
                         {itemPriceTotal(item.price, item.quantity)}.00
                     </Typography>
                     <Typography className="productCardCategory" variant="body2">

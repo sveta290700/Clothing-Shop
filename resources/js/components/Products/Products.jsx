@@ -87,7 +87,7 @@ const Products = ({ products, categories, onAddToCart, totalProducts, productsPe
                 <div className="filters">
                     <div className="categoryFilter">
                         <Typography className="categoryFilterLabel" variant="h6">
-                            Фильтр по категории:
+                            Фильтр по категории
                         </Typography>
                         <List>
                             {categories.map((category) => (
@@ -109,19 +109,20 @@ const Products = ({ products, categories, onAddToCart, totalProducts, productsPe
                     <div className="sortersSearchPriceFilter">
                         <div className="searchBarDiv">
                             <Typography className="searchLabel" variant="h6">
-                                Поиск:
+                                Поиск
                             </Typography>
                         <SearchBar className="searchBar" placeholder="Наименование продукта"
                             onChange={() => console.log('onChange')}
+                            onCancelSearch={() => console.log('onCancelSearch')}
                             onRequestSearch={() => console.log('onRequestSearch')} />
                         </div>
                         <div className="sorters">
                             <Typography className="sortersLabel" variant="h6">
-                                Сортировка:
+                                Сортировка
                             </Typography>
-                            <RadioGroup name="sorts" row value={radioValue} onChange={handleRadioChange}>
-                                <FormControlLabel value="descPrice" control={<Radio size="small"/>} label="▼ Цена товара"/>
-                                <FormControlLabel value="ascPrice" control={<Radio size="small"/>} label="▲ Цена товара"/>
+                            <RadioGroup name="sorts" value={radioValue} onChange={handleRadioChange}>
+                                <FormControlLabel value="descPrice" control={<Radio size="small"/>} label="▼ Цена"/>
+                                <FormControlLabel value="ascPrice" control={<Radio size="small"/>} label="▲ Цена"/>
                                 <FormControlLabel value="descName" control={<Radio size="small"/>} label="▼ Наименование"/>
                                 <FormControlLabel value="ascName" control={<Radio size="small"/>} label="▲ Наименование"/>
                             </RadioGroup>
@@ -129,7 +130,7 @@ const Products = ({ products, categories, onAddToCart, totalProducts, productsPe
                         </div>
                         <div className="priceFilter">
                             <Typography className="priceFilterLabel" variant="h6">
-                                Фильтр по цене:
+                                Фильтр по цене
                             </Typography>
                             <Slider className="priceSlider"
                                     min={500}
