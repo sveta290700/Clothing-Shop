@@ -1,12 +1,28 @@
 import React from 'react';
 import { Grid, Slider, Typography, List, ListItem, ListItemText, ListItemIcon, Checkbox } from '@material-ui/core/';
-import { Pagination} from '@material-ui/lab';
+import { Pagination } from '@material-ui/lab';
 
 import Product from './Product/Product';
 
 import './styles.sass';
 
-const Products = ({ products, categories, onAddToCart, totalProducts, productsPerPage, openPage, paginate }) => {
+const Products = ({ products, categories, onAddToCart, totalProducts, productsPerPage, openPage, paginate, filterByCategory }) => {
+
+    const [checked, setChecked] = React.useState([]);
+
+    const handleToggle = (value) => () => {
+        const currentIndex = checked.indexOf(value);
+        const newChecked = [...checked];
+
+        if (currentIndex === -1) {
+            newChecked.push(value);
+        }
+        else {
+            newChecked.splice(currentIndex, 1);
+        }
+        filterByCategory(newChecked);
+        setChecked(newChecked);
+    };
 
     const handleChange = (e, p) => {
         paginate(p);
@@ -21,24 +37,24 @@ const Products = ({ products, categories, onAddToCart, totalProducts, productsPe
     return (
         <main>
             <div className="content">
-                <div className="toolbar" />
                 <div className="filters">
                     <div className="categoryFilter">
                         <Typography className="categoryFilterLabel" variant="h6">
                             Фильтр по категории:
                         </Typography>
-                        <List component="nav" aria-label="main-nav">
+                        <List>
                             {categories.map((category) => (
-                                <ListItem key={category.name} className="categoryLabel">
+                                <ListItem key={category.id} className="categoryLabel">
                                     <ListItemIcon>
                                         <Checkbox className="checkbox"
                                                   edge="start"
-                                                  checked={false}
+                                                  checked={checked.indexOf(category.id) !== -1}
                                                   tabIndex={-1}
                                                   disableRipple
+                                                  onChange={handleToggle(category.id)}
                                         />
                                     </ListItemIcon>
-                                    <ListItemText primary={category.name} />
+                                    <ListItemText className="categoryItemLabel" primary={category.name} disableTypography/>
                                 </ListItem>
                             ))}
                         </List>

@@ -6,7 +6,7 @@ import './styles.sass';
 const CartItem = ({ item, onUpdateCart, onRemoveFromCart }) => {
 
     const oneItem = () => {
-        if (item.quantity == 1)
+        if (item.quantity === 1)
         {
             onRemoveFromCart(item.id);
         }
@@ -34,10 +34,7 @@ const CartItem = ({ item, onUpdateCart, onRemoveFromCart }) => {
                 </CardContent>
                 <CardActions className="cardCartActions">
                     <div className="buttons">
-                        <Button type="button" size="small" onClick={() => {
-                            onUpdateCart(item.id, -1);
-                            oneItem()
-                        }}>-</Button>
+                        <Button type="button" size="small" onClick={() => {onUpdateCart(item.id, -1); oneItem()}}>-</Button>
                         <Typography>&nbsp;{item.quantity}&nbsp;</Typography>
                         <Button type="button" size="small" onClick={() => onUpdateCart(item.id, 1)}>+</Button>
                     </div>

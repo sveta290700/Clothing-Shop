@@ -24,17 +24,17 @@ const ShippingForm = ({ next }) => {
                 <form onSubmit={methods.handleSubmit((data) => next({ ...data }))}>
                     <Typography variant="h6" className="formTitle">Личные данные</Typography>
                     <Grid container item xs={12} spacing={2} className="formGrid">
-                        <FormInput required name='lastName' label='Фамилия' />
-                        <FormInput required name='firstName' label='Имя' />
+                        <FormInput required name='lastName' label='Фамилия'/>
+                        <FormInput required name='firstName' label='Имя'/>
                         <FormInput name='patronym' label='Отчество'/>
-                        <FormInput required name='telephoneNumber' label='Номер телефона' />
-                        <FormInput required name='email' label='E-mail' />
+                        <FormInput required name='telephoneNumber' label='Номер телефона'/>
+                        <FormInput required name='email' label='E-mail'/>
                     </Grid>
                     <Typography variant="h6" className="formTitle">Доставка</Typography >
                     <Grid container item xs={12} spacing={2} className="formGrid">
-                        <FormInput required name='city' label='Город' />
-                        <FormInput required name='street' label='Улица' />
-                        <FormInput required name='house' label='Дом' />
+                        <FormInput required name='city' label='Город'/>
+                        <FormInput required name='street' label='Улица'/>
+                        <FormInput required name='house' label='Дом'/>
                         <FormInput name='flat' label='Квартира'/>
                     </Grid>
                     <Typography variant="h6" className="formTitle">Комментарий к заказу</Typography>

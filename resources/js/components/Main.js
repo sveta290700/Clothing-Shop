@@ -88,6 +88,20 @@ const Main = () => {
         await fetchCart();
     };
 
+    const filterByCategory = async (idx) => {
+        if (idx.length !== 0) {
+            let filtered = [];
+            for (let i = 0; i < idx.length; i++) {
+                const response = await fetch("http://127.0.0.1:8000/api/products?category=" + idx[i]);
+                const json = await response.json();
+                filtered = filtered.concat(json.data);
+            }
+            setProducts(filtered);
+        }
+        else
+            await fetchProducts();
+    }
+
     useEffect(() => {
         fetchProducts();
         fetchCart();
@@ -104,22 +118,23 @@ const Main = () => {
     return (
         <Router>
             <div className="pageContent">
-                <Navbar totalItems={cart.total_quantity} />
+                <Navbar totalItems={cart.total_quantity}/>
                 <Switch>
                     <Route exact path="/">
                         <Products products={currentProducts} categories={categories} onAddToCart={handleAddToCart}
-                                  totalProducts={products.length} productsPerPage={productsPerPage} openPage={currentPage} paginate={paginate}/>
+                                  totalProducts={products.length} productsPerPage={productsPerPage}
+                                  openPage={currentPage} paginate={paginate} filterByCategory={filterByCategory}/>
                     </Route>
                     <Route exact path="/cart">
                         <Cart
-                            cart={cart} cartList={cartList} handleUpdateCart={handleUpdateCart} handleRemoveFromCart={handleRemoveFromCart}
-                        />
+                            cart={cart} cartList={cartList} handleUpdateCart={handleUpdateCart}
+                            handleRemoveFromCart={handleRemoveFromCart} refreshProducts={fetchProducts}/>
                     </Route>
                     <Route exact path="/product/:id">
-                        <ProductPage onAddToCart={handleAddToCart} />
+                        <ProductPage onAddToCart={handleAddToCart} refreshProducts={fetchProducts}/>
                     </Route>
                     <Route exact path="/checkout">
-                        <Checkout cart={cart} cartList={cartList} onCaptureCheckout={handleCaptureCheckout} />
+                        <Checkout cart={cart} cartList={cartList} onCaptureCheckout={handleCaptureCheckout} refreshProducts={fetchProducts}/>
                     </Route>
                 </Switch>
             </div>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import { Paper, Stepper, Step, StepLabel, Typography, } from '@material-ui/core';
 
 import ShippingForm from '../ShippingForm';
@@ -8,7 +8,7 @@ import './styles.sass';
 
 const steps = ['Ввод данных', 'Подтверждение заказа'];
 
-const Checkout = ({ cart, cartList, onCaptureCheckout }) => {
+const Checkout = ({ cart, cartList, onCaptureCheckout, refreshProducts }) => {
 
     const [activeStep, setActiveStep] = useState(0);
     const [shippingData, setShippingData] = useState({});
@@ -32,6 +32,10 @@ const Checkout = ({ cart, cartList, onCaptureCheckout }) => {
     const Form = () => (activeStep === 0
         ? <ShippingForm nextStep={nextStep} setShippingData={setShippingData} next={next}/>
         : <ConfirmationForm cart={cart} cartList={cartList} shippingData={shippingData} nextStep={nextStep} backStep={backStep} onCaptureCheckout={onCaptureCheckout} />);
+
+    useEffect(() => {
+        refreshProducts();
+    }, []);
 
     return (
         <>

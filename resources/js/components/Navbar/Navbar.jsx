@@ -16,14 +16,14 @@ const Navbar = ({ totalItems }) => {
             <AppBar position="fixed" className="appBar">
                 <Toolbar>
                     <Typography component={Link} to="/" variant="h6" className="title">
-                        <img src={logo} alt="commerce.js" className="image" />
+                        <img src={logo} alt="commerce.js" className="image"/>
                         Магазин одежды
                     </Typography>
                     {location.pathname !== '/cart' && (
                         <div className="button">
                             <IconButton component={Link} to="/cart" className="cartIcon">
                                 <Badge className="badge" badgeContent={totalItems}>
-                                    <ShoppingCart />
+                                    <ShoppingCart/>
                                 </Badge>
                             </IconButton>
                         </div>

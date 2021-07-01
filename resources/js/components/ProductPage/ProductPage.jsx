@@ -4,7 +4,7 @@ import { Link, useHistory } from 'react-router-dom';
 
 import './styles.sass';
 
-const ProductPage = ({ onAddToCart }) => {
+const ProductPage = ({ onAddToCart, refreshProducts }) => {
 
     const history = useHistory();
 
@@ -33,6 +33,7 @@ const ProductPage = ({ onAddToCart }) => {
     useEffect(() => {
         const id = window.location.pathname.split("/");
         fetchProduct(id[2]);
+        refreshProducts();
     }, []);
 
     return (
@@ -42,7 +43,7 @@ const ProductPage = ({ onAddToCart }) => {
             </Typography>
             <div className="productInfo">
             <Paper className="productImage">
-                <img src={product.image} />
+                <img src={product.image}/>
             </Paper>
             <Card className="productCard">
                 <CardContent>

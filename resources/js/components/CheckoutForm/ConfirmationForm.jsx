@@ -67,12 +67,12 @@ const ConfirmationForm = ({ cart, cartList, shippingData, backStep, onCaptureChe
                     <Button className="backButton" type="button" variant="outlined" onClick={backStep}>Назад</Button>
                     <form onSubmit={(e) => handleSubmit(e)}>
                         <input type="hidden" name="lastName" value={shippingData.lastName}/>
-                        <input type="hidden" name="firstName" value={shippingData.firstName} />
+                        <input type="hidden" name="firstName" value={shippingData.firstName}/>
                         <input type="hidden" name="patronym" value={shippingData.patronym}/>
-                        <input type="hidden" name="email" value={shippingData.email} />
-                        <input type="hidden" name="telephoneNumber" value={shippingData.telephoneNumber} />
-                        <input type="hidden" name="city" value={shippingData.city} />
-                        <input type="hidden" name="street" value={shippingData.street} />
+                        <input type="hidden" name="email" value={shippingData.email}/>
+                        <input type="hidden" name="telephoneNumber" value={shippingData.telephoneNumber}/>
+                        <input type="hidden" name="city" value={shippingData.city}/>
+                        <input type="hidden" name="street" value={shippingData.street}/>
                         <input type="hidden" name="house" value={shippingData.house}/>
                         <input type="hidden" name="flat" value={shippingData.flat}/>
                         <input type="hidden" name="comment" value={shippingData.comment}/>

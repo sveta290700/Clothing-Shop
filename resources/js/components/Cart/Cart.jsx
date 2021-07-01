@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import { Container, Typography, Button, Grid } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 
@@ -6,7 +6,7 @@ import CartItem from './CartItem/CartItem'
 
 import './styles.sass';
 
-const Cart = ({ cart, cartList, handleUpdateCart, handleRemoveFromCart }) => {
+const Cart = ({ cart, cartList, handleUpdateCart, handleRemoveFromCart, refreshProducts }) => {
 
     const EmptyCart = () => (
         <Typography variant="subtitle1">Ваша корзина пуста,&nbsp;
@@ -36,6 +36,10 @@ const Cart = ({ cart, cartList, handleUpdateCart, handleRemoveFromCart }) => {
     );
 
     if (!cartList) return 'Загрузка...';
+
+    useEffect(() => {
+        refreshProducts();
+    }, []);
 
     return (
         <Container>
