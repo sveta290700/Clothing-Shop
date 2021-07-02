@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { Grid, Slider, Typography, List, ListItem, ListItemText, ListItemIcon, Checkbox, FormControlLabel, Radio, RadioGroup, Button } from '@material-ui/core/';
 import { Pagination } from '@material-ui/lab';
 import SearchBar from "material-ui-search-bar";
@@ -7,7 +7,7 @@ import Product from './Product/Product';
 
 import './styles.sass';
 
-const Products = ({ products, categories, onAddToCart, totalProducts, productsPerPage, openPage, paginate, filterByCategory, sortProducts }) => {
+const Products = ({ products, categories, onAddToCart, totalProducts, productsPerPage, openPage, paginate, filterByCategory, sortProducts, filterByPrice }) => {
 
     function valuetext(value) {
         return `${value}`;
@@ -19,28 +19,26 @@ const Products = ({ products, categories, onAddToCart, totalProducts, productsPe
         setSliderValue(newValue);
     };
 
-    const dropPriceFilters = () => {
-        setSliderValue([2400, 6000]);
-    };
+    const [filterApplied, setFilterApplied] = useState(false);
 
     const [radioValue, setRadioValue] = useState('empty');
 
     const handleRadioChange = (event) => {
         switch (event.target.value) {
             case 'descPrice': {
-                sortProducts(true, true, false);
+                sortProducts(true, true, false, filterApplied, sliderValue[0], sliderValue[1]);
                 break;
             }
             case 'ascPrice': {
-                sortProducts(false, true, false);
+                sortProducts(false, true, false, filterApplied, sliderValue[0], sliderValue[1]);
                 break;
             }
             case 'descName': {
-                sortProducts(true, false, true);
+                sortProducts(true, false, true, filterApplied, sliderValue[0], sliderValue[1]);
                 break;
             }
             case 'ascName': {
-                sortProducts(false, false, true);
+                sortProducts(false, false, true, filterApplied, sliderValue[0], sliderValue[1]);
                 break;
             }
             default:
@@ -49,26 +47,35 @@ const Products = ({ products, categories, onAddToCart, totalProducts, productsPe
         setRadioValue(event.target.value);
     };
 
-    const [checked, setChecked] = React.useState([]);
+    const [checked, setChecked] = useState([]);
 
     const handleToggle = (value) => () => {
         const currentIndex = checked.indexOf(value);
         const newChecked = [...checked];
-
         if (currentIndex === -1) {
             newChecked.push(value);
         }
         else {
             newChecked.splice(currentIndex, 1);
         }
-
-        filterByCategory(newChecked, radioValue);
+        filterByCategory(newChecked, radioValue, filterApplied, sliderValue[0], sliderValue[1]);
         setChecked(newChecked);
     };
 
     const dropSorts = () => {
-        filterByCategory(checked, 'empty');
+        filterByCategory(checked, 'empty', filterApplied);
         setRadioValue('empty');
+    };
+
+    const applyPriceFilter = () => {
+        filterByPrice(checked, radioValue, sliderValue[0], sliderValue[1], false);
+        setFilterApplied(true);
+    }
+
+    const dropPriceFilters = () => {
+        setSliderValue([2400, 6000]);
+        filterByPrice(checked, radioValue, 0, 8000, true);
+        setFilterApplied(false);
     };
 
     const handleChange = (e, p) => {
@@ -140,10 +147,10 @@ const Products = ({ products, categories, onAddToCart, totalProducts, productsPe
                                     onChange={handleSliderChange}
                                     valueLabelDisplay="on"
                                     aria-labelledby="range-slider"
-                                    getAriaValueText={valuetext} />
+                                    getAriaValueText={valuetext}/>
                             <div className="priceFilterButtons">
-                            <Button className="applyPriceFiltersButton" type="button" variant="contained">Применить</Button>
-                            <Button className="dropPriceFiltersButton" type="button" variant="contained" onClick={() => dropPriceFilters()}>Сброс</Button>
+                            <Button className="applyPriceFiltersButton" type="button" variant="contained" disabled={filterApplied} onClick={() => applyPriceFilter()}>Применить</Button>
+                            <Button className="dropPriceFiltersButton" type="button" variant="contained" disabled={!filterApplied} onClick={() => dropPriceFilters()}>Сброс</Button>
                             </div>
                         </div>
                     </div>
@@ -151,12 +158,12 @@ const Products = ({ products, categories, onAddToCart, totalProducts, productsPe
                 <Grid className="items" container spacing={1}>
                     {products.map((product) => (
                         <Grid item key={product.id} xs={8} sm={7} md={6} lg={3}>
-                            <Product product={product} onAddToCart={onAddToCart} />
+                            <Product product={product} onAddToCart={onAddToCart}/>
                         </Grid>
                     ))}
                 </Grid>
             </div>
-            <Pagination size="large" color="secondary" onChange={handleChange} page={openPage} count={pageNumbers.length} />
+            <Pagination size="large" color="secondary" onChange={handleChange} page={openPage} count={pageNumbers.length}/>
         </main>
     );
 };

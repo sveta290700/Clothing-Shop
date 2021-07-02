@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
-import { Navbar, Products, Cart, ProductPage, Checkout } from '../components';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { Cart, Checkout, Navbar, ProductPage, Products } from '../components';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import './styles.sass';
 
 const Main = () => {
 
     const [products, setProducts] = useState([]);
+    const [allProductsInRange, setAllProductsInRange] = useState([]);
     const [cart, setCart] = useState({});
     const [cartList, setCartList] = useState([]);
     const [categories, setCategories] = useState([]);
@@ -89,7 +90,34 @@ const Main = () => {
         await fetchCart();
     };
 
-    const filterByCategory = async (idx, radioValue) => {
+    function performIntersection(arr1, arr2) {
+        return arr1.filter(item1 => arr2.some(item2 => item1.id === item2.id));
+    }
+
+    const filterAllByPrice = async (left, right) => {
+        const response = await fetch("http://127.0.0.1:8000/api/products");
+        const json = await response.json();
+        const allProducts = json.data.slice();
+        let allProductsInRangeArray = allProducts.filter(value => {return (value.price >= left && value.price <= right)});
+        setAllProductsInRange(allProductsInRangeArray);
+    };
+
+    const filterByPrice = async (checkedCategories, appliedSort, left, right, reset) => {
+        if (!reset) {
+            let filteredByPriceProducts = products.slice();
+            filteredByPriceProducts = filteredByPriceProducts.filter(value => {
+                return (value.price >= left && value.price <= right);
+            });
+            setProducts(filteredByPriceProducts);
+            await filterAllByPrice(left, right);
+        }
+        else {
+            await filterAllByPrice(left, right);
+            await filterByCategory(checkedCategories, appliedSort, false, left, right);
+        }
+    };
+
+    const filterByCategory = async (idx, radioValue, priceFiltered, left, right) => {
         if (idx.length !== 0) {
             let filtered = [];
             for (let i = 0; i < idx.length; i++) {
@@ -101,25 +129,36 @@ const Main = () => {
             {
                 switch (radioValue) {
                     case 'descPrice': {
-                        sortFilteredProducts(filtered, false, true, false);
+                        sortFilteredProducts(filtered, false, true, false, priceFiltered, left, right);
                         break;
                     }
                     case 'ascPrice': {
-                        sortFilteredProducts(filtered, false, true, false);
+                        sortFilteredProducts(filtered, false, true, false, priceFiltered, left, right);
                         break;
                     }
                     case 'descName': {
-                        sortFilteredProducts(filtered, true, false, true);
+                        sortFilteredProducts(filtered, true, false, true, priceFiltered, left, right);
                         break;
                     }
                     case 'ascName': {
-                        sortFilteredProducts(filtered, false, false, true);
+                        sortFilteredProducts(filtered, false, false, true, priceFiltered, left, right);
                         break;
                     }
                 }
             }
-            else
-                setProducts(filtered);
+            else {
+                if (priceFiltered) {
+                    await filterAllByPrice(left, right);
+                    const intersection = performIntersection(filtered, allProductsInRange);
+                    setProducts(intersection);
+                }
+                else
+                    setProducts(filtered);
+            }
+        }
+        else if (priceFiltered) {
+            await filterAllByPrice(left, right);
+            setProducts(allProductsInRange);
         }
         else
             await fetchProducts();
@@ -146,56 +185,104 @@ const Main = () => {
         return a.name.localeCompare(b.name);
     }
 
-    const sortProducts = (desc, priceSort, nameSort) => {
+    const sortProducts = (desc, priceSort, nameSort, priceFiltered, left, right) => {
         const sortedProducts = products.slice();
         if (priceSort) {
             if (desc) {
                 sortedProducts.sort(sortPrice).reverse();
-                setProducts(sortedProducts);
+                if (priceFiltered) {
+                    filterAllByPrice(left, right);
+                    const result = performIntersection(sortedProducts, allProductsInRange);
+                    setProducts(result);
+                }
+                else
+                    setProducts(sortedProducts);
             }
             else
             {
-                sortedProducts.sort(sortPrice)
-                setProducts(sortedProducts);
+                sortedProducts.sort(sortPrice);
+                if (priceFiltered) {
+                    filterAllByPrice(left, right);
+                    const result = performIntersection(sortedProducts, allProductsInRange);
+                    setProducts(result);
+                }
+                else
+                    setProducts(sortedProducts);
             }
         }
         else if (nameSort) {
             if (desc) {
                 sortedProducts.sort(sortName).reverse();
-                setProducts(sortedProducts);
+                if (priceFiltered) {
+                    filterAllByPrice(left, right);
+                    const result = performIntersection(sortedProducts, allProductsInRange);
+                    setProducts(result);
+                }
+                else
+                    setProducts(sortedProducts);
             }
             else
             {
                 sortedProducts.sort(sortName);
-                setProducts(sortedProducts);
+                if (priceFiltered) {
+                    filterAllByPrice(left, right);
+                    const result = performIntersection(sortedProducts, allProductsInRange);
+                    setProducts(result);
+                }
+                else
+                    setProducts(sortedProducts);
             }
         }
         else
             console.log('Incorrect function parameters')
     };
 
-    const sortFilteredProducts = (filtered, desc, priceSort, nameSort) => {
+    const sortFilteredProducts = (filtered, desc, priceSort, nameSort, priceFiltered, left, right) => {
         const sortedProducts = filtered.slice();
         if (priceSort) {
             if (desc) {
                 sortedProducts.sort(sortPrice).reverse();
-                setProducts(sortedProducts);
+                if (priceFiltered) {
+                    filterAllByPrice(left, right);
+                    const result = performIntersection(sortedProducts, allProductsInRange);
+                    setProducts(result);
+                }
+                else
+                    setProducts(sortedProducts);
             }
             else
             {
-                sortedProducts.sort(sortPrice)
-                setProducts(sortedProducts);
+                sortedProducts.sort(sortPrice);
+                if (priceFiltered) {
+                    filterAllByPrice(left, right);
+                    const result = performIntersection(sortedProducts, allProductsInRange);
+                    setProducts(result);
+                }
+                else
+                    setProducts(sortedProducts);
             }
         }
         else if (nameSort) {
             if (desc) {
                 sortedProducts.sort(sortName).reverse();
-                setProducts(sortedProducts);
+                if (priceFiltered) {
+                    filterAllByPrice(left, right);
+                    const result = performIntersection(sortedProducts, allProductsInRange);
+                    setProducts(result);
+                }
+                else
+                    setProducts(sortedProducts);
             }
             else
             {
                 sortedProducts.sort(sortName);
-                setProducts(sortedProducts);
+                if (priceFiltered) {
+                    filterAllByPrice(left, right);
+                    const result = performIntersection(sortedProducts, allProductsInRange);
+                    setProducts(result);
+                }
+                else
+                    setProducts(sortedProducts);
             }
         }
         else
@@ -210,7 +297,8 @@ const Main = () => {
                     <Route exact path="/">
                         <Products products={currentProducts} categories={categories} onAddToCart={handleAddToCart}
                                   totalProducts={products.length} productsPerPage={productsPerPage}
-                                  openPage={currentPage} paginate={paginate} filterByCategory={filterByCategory} sortProducts={sortProducts}/>
+                                  openPage={currentPage} paginate={paginate} filterByCategory={filterByCategory} sortProducts={sortProducts}
+                                  filterByPrice={filterByPrice}/>
                     </Route>
                     <Route exact path="/cart">
                         <Cart
@@ -227,7 +315,7 @@ const Main = () => {
             </div>
         </Router>
     )
-}
+};
 
 export default Main;
 

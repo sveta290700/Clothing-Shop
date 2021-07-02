@@ -23,12 +23,12 @@ const ProductPage = ({ onAddToCart, refreshProducts }) => {
             .then(
                 (result) => {
                     setProduct(result.data);
-                },
+                    },
                 (error) => {
                     console.log('Error');
                 }
-            )
-    }
+                )
+    };
 
     useEffect(() => {
         const id = window.location.pathname.split("/");
@@ -43,7 +43,7 @@ const ProductPage = ({ onAddToCart, refreshProducts }) => {
             </Typography>
             <div className="productInfo">
             <Paper className="productImage">
-                <img src={product.image}/>
+                <img src={product.image} alt={product.name}/>
             </Paper>
             <Card className="productCard">
                 <CardContent>

@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import { Paper, Stepper, Step, StepLabel, Typography, } from '@material-ui/core';
+import React, { useEffect, useState } from 'react';
+import { Paper, Stepper, Step, StepLabel, Typography } from '@material-ui/core';
 
 import ShippingForm from '../ShippingForm';
 import ConfirmationForm from '../ConfirmationForm';
@@ -23,7 +23,7 @@ const Checkout = ({ cart, cartList, onCaptureCheckout, refreshProducts }) => {
 
     const ConfirmedOrder = () => (
         <Typography variant="h6" className="formTitle">
-            Спасибо за покупку, {shippingData.lastName} {shippingData.firstName}! :)
+            Спасибо за покупку, {shippingData.lastName} {shippingData.firstName}!
             <br />
             На Вашу почту было направлено сообщение о подтверждении заказа.
         </Typography>

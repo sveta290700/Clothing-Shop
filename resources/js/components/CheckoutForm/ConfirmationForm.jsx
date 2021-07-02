@@ -14,16 +14,16 @@ const ConfirmationForm = ({ cart, cartList, shippingData, backStep, onCaptureChe
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        // emailjs.sendForm('service_lna5dwq', 'template_67w7h3n', event.target, 'user_wkvrIcMqi9w7HLHH1X9w1')
-        //     .then((result) => {
-        //         console.log(result.text);
-        //     }, (error) => {
-        //         console.log(error.text);
-        //    });
+        emailjs.sendForm('service_lna5dwq', 'template_67w7h3n', event.target, 'user_wkvrIcMqi9w7HLHH1X9w1')
+            .then((result) => {
+                console.log(result.text);
+            }, (error) => {
+                console.log(error.text);
+           });
         checkoutOrder();
     }
 
-    const checkoutOrder = async () => {
+    const checkoutOrder = () => {
         const orderData = {
             fio: shippingData.lastName + " " + shippingData.firstName + " " +  shippingData.patronym,
             phone_number: shippingData.telephoneNumber,
