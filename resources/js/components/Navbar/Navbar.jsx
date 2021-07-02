@@ -31,7 +31,7 @@ const Navbar = ({ totalItems }) => {
                 </Toolbar>
             </AppBar>
         </>
-    )
-}
+    );
+};
 
 export default Navbar;

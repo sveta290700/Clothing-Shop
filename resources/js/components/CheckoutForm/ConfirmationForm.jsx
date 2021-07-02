@@ -21,7 +21,7 @@ const ConfirmationForm = ({ cart, cartList, shippingData, backStep, onCaptureChe
                 console.log(error.text);
            });
         checkoutOrder();
-    }
+    };
 
     const checkoutOrder = () => {
         const orderData = {
@@ -84,6 +84,6 @@ const ConfirmationForm = ({ cart, cartList, shippingData, backStep, onCaptureChe
             </div>
         </>
     );
-}
+};
 
 export default ConfirmationForm;

@@ -27,7 +27,7 @@ const Checkout = ({ cart, cartList, onCaptureCheckout, refreshProducts }) => {
             <br />
             На Вашу почту было направлено сообщение о подтверждении заказа.
         </Typography>
-    )
+    );
 
     const Form = () => (activeStep === 0
         ? <ShippingForm nextStep={nextStep} setShippingData={setShippingData} next={next}/>

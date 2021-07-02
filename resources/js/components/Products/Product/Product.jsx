@@ -13,7 +13,7 @@ const Product = ({ product, onAddToCart }) => {
     const goToCart = () => {
         if (buttonState.clickCount > 0 && buttonState.secondClickFlag === true)
             history.push("/cart");
-    }
+    };
 
     return (
         <Card className="root">

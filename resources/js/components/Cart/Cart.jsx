@@ -49,7 +49,6 @@ const Cart = ({ cart, cartList, handleUpdateCart, handleRemoveFromCart, refreshP
             {!cart.total_quantity ? <EmptyCart/> : <FilledCart/>}
         </Container>
     );
-
 };
 
 export default Cart;

@@ -7,9 +7,9 @@ import Product from './Product/Product';
 
 import './styles.sass';
 
-const Products = ({ products, categories, onAddToCart, totalProducts, productsPerPage, openPage, paginate, filterByCategory, sortProducts, filterByPrice }) => {
+const Products = ({ products, categories, onAddToCart, totalProducts, productsPerPage, openPage, paginate, filterByCategory, sortProducts, filterByPrice, searchByName }) => {
 
-    function valuetext(value) {
+    function sliderValueText(value) {
         return `${value}`;
     }
 
@@ -23,22 +23,26 @@ const Products = ({ products, categories, onAddToCart, totalProducts, productsPe
 
     const [radioValue, setRadioValue] = useState('empty');
 
+    const [searched, setSearched] = useState(false);
+
+    const [searchString, setSearchString] = useState();
+
     const handleRadioChange = (event) => {
         switch (event.target.value) {
             case 'descPrice': {
-                sortProducts(true, true, false, filterApplied, sliderValue[0], sliderValue[1]);
+                sortProducts(true, true, false, filterApplied, sliderValue[0], sliderValue[1], searched, searchString);
                 break;
             }
             case 'ascPrice': {
-                sortProducts(false, true, false, filterApplied, sliderValue[0], sliderValue[1]);
+                sortProducts(false, true, false, filterApplied, sliderValue[0], sliderValue[1], searched, searchString);
                 break;
             }
             case 'descName': {
-                sortProducts(true, false, true, filterApplied, sliderValue[0], sliderValue[1]);
+                sortProducts(true, false, true, filterApplied, sliderValue[0], sliderValue[1], searched, searchString);
                 break;
             }
             case 'ascName': {
-                sortProducts(false, false, true, filterApplied, sliderValue[0], sliderValue[1]);
+                sortProducts(false, false, true, filterApplied, sliderValue[0], sliderValue[1], searched, searchString);
                 break;
             }
             default:
@@ -58,24 +62,40 @@ const Products = ({ products, categories, onAddToCart, totalProducts, productsPe
         else {
             newChecked.splice(currentIndex, 1);
         }
-        filterByCategory(newChecked, radioValue, filterApplied, sliderValue[0], sliderValue[1]);
+        filterByCategory(newChecked, radioValue, filterApplied, sliderValue[0], sliderValue[1], searched, searchString);
         setChecked(newChecked);
     };
 
     const dropSorts = () => {
-        filterByCategory(checked, 'empty', filterApplied);
+        filterByCategory(checked, 'empty', filterApplied, sliderValue[0], sliderValue[1], searched, searchString);
         setRadioValue('empty');
     };
 
     const applyPriceFilter = () => {
-        filterByPrice(checked, radioValue, sliderValue[0], sliderValue[1], false);
+        filterByPrice(checked, radioValue, sliderValue[0], sliderValue[1], false, searched, searchString);
         setFilterApplied(true);
-    }
+    };
 
     const dropPriceFilters = () => {
         setSliderValue([2400, 6000]);
-        filterByPrice(checked, radioValue, 0, 8000, true);
+        filterByPrice(checked, radioValue, 0, 8000, true, searched, searchString);
         setFilterApplied(false);
+    };
+
+    const doSearch = (value) => {
+        if (filterApplied)
+            searchByName(value, checked, radioValue, sliderValue[0], sliderValue[1], filterApplied, false);
+        else
+            searchByName(value, checked, radioValue, 0, 8000, filterApplied, false);
+        setSearched(true);
+    };
+
+    const cancelSearch = (value) => {
+        if (filterApplied)
+            searchByName(value, checked, radioValue, sliderValue[0], sliderValue[1], filterApplied, true);
+        else
+            searchByName(value, checked, radioValue, 0, 8000, filterApplied, true);
+        setSearched(false);
     };
 
     const handleChange = (e, p) => {
@@ -119,9 +139,10 @@ const Products = ({ products, categories, onAddToCart, totalProducts, productsPe
                                 Поиск
                             </Typography>
                         <SearchBar className="searchBar" placeholder="Наименование продукта"
-                            onChange={() => console.log('onChange')}
-                            onCancelSearch={() => console.log('onCancelSearch')}
-                            onRequestSearch={() => console.log('onRequestSearch')} />
+                            value={searchString}
+                            onChange={(newValue) => setSearchString(newValue)}
+                            onCancelSearch={() => cancelSearch(searchString)}
+                            onRequestSearch={() => doSearch(searchString)}/>
                         </div>
                         <div className="sorters">
                             <Typography className="sortersLabel" variant="h6">
@@ -147,7 +168,7 @@ const Products = ({ products, categories, onAddToCart, totalProducts, productsPe
                                     onChange={handleSliderChange}
                                     valueLabelDisplay="on"
                                     aria-labelledby="range-slider"
-                                    getAriaValueText={valuetext}/>
+                                    getAriaValueText={sliderValueText}/>
                             <div className="priceFilterButtons">
                             <Button className="applyPriceFiltersButton" type="button" variant="contained" disabled={filterApplied} onClick={() => applyPriceFilter()}>Применить</Button>
                             <Button className="dropPriceFiltersButton" type="button" variant="contained" disabled={!filterApplied} onClick={() => dropPriceFilters()}>Сброс</Button>

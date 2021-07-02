@@ -10,13 +10,13 @@ const CartItem = ({ item, onUpdateCart, onRemoveFromCart }) => {
         {
             onRemoveFromCart(item.id);
         }
-    }
+    };
 
     const itemPriceTotal = (itemPrice, itemQuantity) => {
         {
             return itemPrice * itemQuantity;
         }
-    }
+    };
 
     return (
         <Card className="root">

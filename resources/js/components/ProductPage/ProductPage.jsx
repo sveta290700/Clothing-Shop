@@ -27,7 +27,7 @@ const ProductPage = ({ onAddToCart, refreshProducts }) => {
                 (error) => {
                     console.log('Error');
                 }
-                )
+            )
     };
 
     useEffect(() => {
@@ -79,7 +79,7 @@ const ProductPage = ({ onAddToCart, refreshProducts }) => {
                 </Button>
             </div>
         </Container>
-    )
+    );
 };
 
 export default ProductPage;
