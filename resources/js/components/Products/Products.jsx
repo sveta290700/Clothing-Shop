@@ -13,7 +13,7 @@ const Products = ({ products, categories, onAddToCart, totalProducts, productsPe
         return `${value}`;
     }
 
-    const [sliderValue, setSliderValue] = useState([2400, 6000]);
+    const [sliderValue, setSliderValue] = useState([500, 8000]);
 
     const handleSliderChange = (event, newValue) => {
         setSliderValue(newValue);
@@ -77,8 +77,8 @@ const Products = ({ products, categories, onAddToCart, totalProducts, productsPe
     };
 
     const dropPriceFilters = () => {
-        setSliderValue([2400, 6000]);
-        filterByPrice(checked, radioValue, 0, 8000, true, searched, searchString);
+        setSliderValue([500, 8000]);
+        filterByPrice(checked, radioValue, 500, 8000, true, searched, searchString);
         setFilterApplied(false);
     };
 
@@ -86,7 +86,7 @@ const Products = ({ products, categories, onAddToCart, totalProducts, productsPe
         if (filterApplied)
             searchByName(value, checked, radioValue, sliderValue[0], sliderValue[1], filterApplied, false);
         else
-            searchByName(value, checked, radioValue, 0, 8000, filterApplied, false);
+            searchByName(value, checked, radioValue, 500, 8000, filterApplied, false);
         setSearched(true);
     };
 
@@ -94,7 +94,7 @@ const Products = ({ products, categories, onAddToCart, totalProducts, productsPe
         if (filterApplied)
             searchByName(value, checked, radioValue, sliderValue[0], sliderValue[1], filterApplied, true);
         else
-            searchByName(value, checked, radioValue, 0, 8000, filterApplied, true);
+            searchByName(value, checked, radioValue, 500, 8000, filterApplied, true);
         setSearched(false);
     };
 
