@@ -17,7 +17,7 @@ const Product = ({ product, onAddToCart }) => {
 
     return (
         <Card className="root">
-            <CardMedia className="media" image={product.image} title={product.name} component={Link} to={`product/${product.id}`} />
+            <CardMedia className="media" image={product.image} title={product.name} component={Link} to={`product/${product.id}`}/>
             <CardContent className="cardContent">
                     <Typography className="productName" component={Link} to={`product/${product.id}`}>
                         {product.name}

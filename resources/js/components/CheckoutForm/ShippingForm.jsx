@@ -1,52 +1,119 @@
 import React from 'react';
-import { Button, Grid, Typography } from '@material-ui/core';
-import { useForm, FormProvider } from 'react-hook-form';
+import { Button, Typography } from '@material-ui/core';
+import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
-
-import FormInput from './CustomTextField';
 
 import './styles.sass';
 
 const ShippingForm = ({ next }) => {
 
-    const methods = useForm({
-        defaultValues:
-            {
-                patronym: "",
-                flat: "",
-                comment: ""
-            }
-    });
+    const { register, handleSubmit, formState: { errors } } = useForm();
+
+    const onSubmit = (data) => {
+        next({ ...data });
+    };
 
     return (
         <>
-            <FormProvider {...methods}>
-                <form onSubmit={methods.handleSubmit((data) => next({ ...data }))}>
-                    <Typography variant="h6" className="formTitle">Личные данные</Typography>
-                    <Grid container item xs={12} spacing={2} className="formGrid">
-                        <FormInput required name='lastName' label='Фамилия'/>
-                        <FormInput required name='firstName' label='Имя'/>
-                        <FormInput name='patronym' label='Отчество'/>
-                        <FormInput required name='telephoneNumber' label='Номер телефона'/>
-                        <FormInput required name='email' label='E-mail'/>
-                    </Grid>
-                    <Typography variant="h6" className="formTitle">Доставка</Typography >
-                    <Grid container item xs={12} spacing={2} className="formGrid">
-                        <FormInput required name='city' label='Город'/>
-                        <FormInput required name='street' label='Улица'/>
-                        <FormInput required name='house' label='Дом'/>
-                        <FormInput name='flat' label='Квартира'/>
-                    </Grid>
-                    <Typography variant="h6" className="formTitle">Комментарий к заказу</Typography>
-                    <div className="orderComment">
-                        <FormInput name='comment' label='Комментарий'/>
-                    </div>
-                    <div className="buttons">
-                        <Button className="toCartButton" component={Link} variant="outlined" to="/cart">К корзине</Button>
-                        <Button className="nextButton" type="submit" variant="outlined">Далее</Button>
-                    </div>
-                </form>
-            </FormProvider>
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <Typography variant="h6" className="formTitle">Личные данные</Typography>
+                <label className="inputLabel">Фамилия</label>
+                <input
+                    placeholder="Фамилия"
+                    {...register("lastName", {
+                        required: true,
+                        pattern: /^[А-Я][а-я]+$/
+                    })}
+                />
+                {errors?.lastName?.type === "required" && <p>⚠ Заполните поле "Фамилия"</p>}
+                {errors?.lastName?.type === "pattern" && <p>⚠ Некорректный формат данных в поле "Фамилия"</p>}
+                <label className="inputLabel">Имя</label>
+                <input
+                    placeholder="Имя"
+                    {...register("firstName", {
+                        required: true,
+                        pattern: /^[А-Я][а-я]+$/
+                    })}
+                />
+                {errors?.firstName?.type === "required" && <p>⚠ Заполните поле "Имя"</p>}
+                {errors?.firstName?.type === "pattern" && <p>⚠ Некорректный формат данных в поле "Имя"</p>}
+                <label className="inputLabel">Отчество</label>
+                <input
+                    placeholder="Отчество"
+                    {...register("patronym", {
+                        pattern: /^[А-Я][а-я]+$/
+                    })}
+                />
+                {errors?.patronym?.type === "pattern" && <p>⚠ Некорректный формат данных в поле "Отчество"</p>}
+                <label className="inputLabel">Номер телефона</label>
+                <input
+                    placeholder="Номер телефона"
+                    {...register("telephoneNumber", {
+                        required: true,
+                        pattern: /^((\+7|7|8)+([0-9]){10})$/
+                    })}
+                />
+                {errors?.telephoneNumber?.type === "required" && <p>⚠ Заполните поле "Номер телефона"</p>}
+                {errors?.telephoneNumber?.type === "pattern" && <p>⚠ Некорректный формат данных в поле "Номер телефона"</p>}
+                <label className="inputLabel">Номер телефона</label>
+                <input
+                    placeholder="E-mail"
+                    {...register("email", {
+                        required: true,
+                        pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+                    })}
+                />
+                {errors?.email?.type === "required" && <p>⚠ Заполните поле "E-mail"</p>}
+                {errors?.email?.type === "pattern" && <p>⚠ Некорректный формат данных в поле "E-mail"</p>}
+                <Typography variant="h6" className="formTitle">Доставка</Typography>
+                <label className="inputLabel">Город</label>
+                <input
+                    placeholder="Город"
+                    {...register("city", {
+                        required: true,
+                        pattern: /^[А-Я][а-яА-Я]+(?:[\s-][а-яА-Я]+){0,2}$/
+                    })}
+                />
+                {errors?.city?.type === "required" && <p>⚠ Заполните поле "Город"</p>}
+                {errors?.city?.type === "pattern" && <p>⚠ Некорректный формат данных в поле "Город"</p>}
+                <label className="inputLabel">Улица</label>
+                <input
+                    placeholder="Улица"
+                    {...register("street", {
+                        required: true,
+                        pattern: /^[А-Яа-я0-9\.\-\s]+$/
+                    })}
+                />
+                {errors?.street?.type === "required" && <p>⚠ Заполните поле "Улица"</p>}
+                {errors?.street?.type === "pattern" && <p>⚠ Некорректный формат данных в поле "Улица"</p>}
+                <label className="inputLabel">Дом</label>
+                <input
+                    placeholder="Дом"
+                    {...register("house", {
+                        required: true,
+                        pattern: /^[1-9][0-9]*[а-я]*/
+                    })}
+                />
+                {errors?.house?.type === "required" && <p>⚠ Заполните поле "Дом"</p>}
+                {errors?.house?.type === "pattern" && <p>⚠ Некорректный формат данных в поле "Дом"</p>}
+                <label className="inputLabel">Квартира</label>
+                <input
+                    placeholder="Квартира"
+                    {...register("flat", {
+                        pattern: /^[1-9][0-9]*$/
+                    })}
+                />
+                {errors?.flat?.type === "pattern" && <p>⚠ Некорректный формат данных в поле "Квартира"</p>}
+                <Typography variant="h6" className="formTitle">Комментарий к заказу</Typography>
+                <input
+                    placeholder="Комментарий"
+                    {...register("comment")}
+                />
+                <div className="buttons">
+                    <Button className="toCartButton" component={Link} variant="outlined" to="/cart">К корзине</Button>
+                    <Button className="nextButton" type="submit" variant="outlined">Далее</Button>
+                </div>
+            </form>
         </>
     );
 };

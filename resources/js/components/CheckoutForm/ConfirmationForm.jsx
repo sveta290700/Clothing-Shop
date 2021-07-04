@@ -42,27 +42,27 @@ const ConfirmationForm = ({ cart, cartList, shippingData, backStep, onCaptureChe
             <List disablePadding>
                 {cartList.map((product) => (
                     <ListItem className="listItem" key={product.name}>
-                        <ListItemText primary={product.name} secondary={`Количество: ${product.quantity}`} />
+                        <ListItemText primary={product.name} secondary={`Количество: ${product.quantity}`}/>
                         <Typography variant="body2">
                             {product.price}.00
                         </Typography>
                     </ListItem>
                 ))}
                 <ListItem className="listItem">
-                    <ListItemText primary="Итоговая стоимость заказа" />
-                    <Typography className="price" variant="subtitle1">
+                    <ListItemText primary="Итоговая стоимость заказа"/>
+                    <Typography className="totalOrderPrice" variant="subtitle1">
                         {cart.total_amount}.00
                     </Typography>
                 </ListItem>
             </List>
-            <Divider />
+            <Divider/>
             <Typography variant="h6" className="formTitle">Подтверждение заказа</Typography>
             <div className="orderConfirmation">
                 <FormControlLabel
                     onChange={handleChange}
                     control={<Checkbox/>}
                     label="Соглашаюсь на обработку данных"
-                    labelPlacement="end" />
+                    labelPlacement="end"/>
                 <div className="buttons">
                     <Button className="backToShippingFormButton" type="button" variant="outlined" onClick={backStep}>Назад</Button>
                     <form onSubmit={(e) => handleSubmit(e)}>

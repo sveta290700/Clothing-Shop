@@ -24,7 +24,7 @@ const Cart = ({ cart, cartList, handleUpdateCart, handleRemoveFromCart, refreshP
                 ))}
             </Grid>
             <div className="cartDetails">
-                <Typography variant="h4">Сумма: {cart.total_amount}.00</Typography>
+                <Typography variant="h4" className="cartTotal">Сумма: {cart.total_amount}.00</Typography>
                 <div>
                     <Button className="backFromCartButton" component={Link} to="/" size="large" type="button"
                             variant="contained">Назад</Button>

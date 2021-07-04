@@ -24,14 +24,14 @@ const Checkout = ({ cart, cartList, onCaptureCheckout, refreshProducts }) => {
     const ConfirmedOrder = () => (
         <Typography variant="h6" className="formTitle">
             Спасибо за покупку, {shippingData.lastName} {shippingData.firstName}!
-            <br />
-            На Вашу почту было направлено сообщение о подтверждении заказа.
+            <br/>
+            На указанную Вами почту {shippingData.email} было направлено сообщение о подтверждении заказа.
         </Typography>
     );
 
     const Form = () => (activeStep === 0
         ? <ShippingForm nextStep={nextStep} setShippingData={setShippingData} next={next}/>
-        : <ConfirmationForm cart={cart} cartList={cartList} shippingData={shippingData} nextStep={nextStep} backStep={backStep} onCaptureCheckout={onCaptureCheckout} />);
+        : <ConfirmationForm cart={cart} cartList={cartList} shippingData={shippingData} nextStep={nextStep} backStep={backStep} onCaptureCheckout={onCaptureCheckout}/>);
 
     useEffect(() => {
         refreshProducts();
@@ -45,11 +45,11 @@ const Checkout = ({ cart, cartList, onCaptureCheckout, refreshProducts }) => {
                     <Stepper activeStep={activeStep}>
                         {steps.map((label) => (
                             <Step key={label}>
-                                <StepLabel>{label}</StepLabel>
+                                <StepLabel className="stepLabel">{label}</StepLabel>
                             </Step>
                         ))}
                     </Stepper>
-                    {activeStep === steps.length ? <ConfirmedOrder /> : <Form />}
+                    {activeStep === steps.length ? <ConfirmedOrder/> : <Form/>}
                 </Paper>
             </main>
         </>

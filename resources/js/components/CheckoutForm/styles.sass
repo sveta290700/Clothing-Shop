@@ -6,8 +6,9 @@ $buttonColorSecondary: black
 .MuiTypography-root.formTitle.MuiTypography-h6
     margin-bottom: 10px
     margin-top: 10px
+    cursor: default
 
-.MuiGrid-root.formGrid.MuiGrid-container.MuiGrid-spacing-xs-2.MuiGrid-item.MuiGrid-grid-xs-12, .orderComment
+.MuiGrid-root.formGrid.MuiGrid-container.MuiGrid-spacing-xs-2.MuiGrid-item.MuiGrid-grid-xs-12
     margin-bottom: 5px
     margin-top: 5px
 
@@ -37,9 +38,11 @@ $buttonColorSecondary: black
 
 .MuiListItem-root.listItem
     padding: 10px 0
+    cursor: default
 
-.MuiTypography-root.price.MuiTypography-subtitle1
+.MuiTypography-root.totalOrderPrice.MuiTypography-subtitle1
     font-weight: 700
+    cursor: default
 
 .orderConfirmation
     display: flex
@@ -47,3 +50,21 @@ $buttonColorSecondary: black
 
 .MuiCheckbox-colorPrimary.Mui-checked
     color: $buttonColorPrimary
+
+input
+    display: block
+    box-sizing: border-box
+    width: 100%
+    border-radius: 4px
+    border: 1px solid $buttonColorPrimary
+    padding: 10px 15px
+    margin-bottom: 10px
+    font-size: 14px
+
+.inputLabel
+    line-height: 2
+    text-align: left
+    display: block
+    color: $textColorPrimary
+    font-size: 14px
+    font-weight: 200

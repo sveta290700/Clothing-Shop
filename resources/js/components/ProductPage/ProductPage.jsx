@@ -23,11 +23,8 @@ const ProductPage = ({ onAddToCart, refreshProducts }) => {
             .then(
                 (result) => {
                     setProduct(result.data);
-                    },
-                (error) => {
-                    console.log('Error');
                 }
-            )
+                )
     };
 
     useEffect(() => {
