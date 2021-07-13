@@ -11,3 +11,5 @@
 - php artisan parsing:add - для заполения базы парсингом с каталога сайта https://serovski.ru/catalog/zhenskoe/
 - php artisan serve - для запуска сервера (использовался сервер MAMP 4.2.0)
 - npm install - для установки необходимых для работы пакетов
+
+На случай возникновения проблем с парсингом дамп базы данных clothing_store.sql находится в папке clothing_store/public
