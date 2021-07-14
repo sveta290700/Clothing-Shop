@@ -110,6 +110,7 @@ const Main = () => {
                 return (value.price >= left && value.price <= right);
             });
             setProducts(filteredByPriceProducts);
+            setCurrentPage(1);
             await filterAllByPrice(left, right);
         }
         else {
@@ -133,6 +134,7 @@ const Main = () => {
             searchedProducts = searchedProducts.filter(function(el) {
                 return (el.name.toLowerCase().indexOf(value.toLowerCase()) > -1 || el.name.indexOf(value) > -1)});
             setProducts(searchedProducts);
+            setCurrentPage(1);
             await searchAllByName(value);
         }
         else {
@@ -180,6 +182,7 @@ const Main = () => {
                         intersection = performIntersection(intersection, allSearchedProducts);
                     }
                     setProducts(intersection);
+                    setCurrentPage(1);
                 }
                 else
                 {
@@ -188,9 +191,13 @@ const Main = () => {
                         await searchAllByName(searchString);
                         const intersection = performIntersection(filtered, allSearchedProducts);
                         setProducts(intersection);
+                        setCurrentPage(1);
                     }
                     else
+                    {
                         setProducts(filtered);
+                        setCurrentPage(1);
+                    }
                 }
             }
         }
@@ -201,16 +208,19 @@ const Main = () => {
                 await filterAllByPrice(left, right);
                 const intersection = performIntersection(allProductsInRange, allSearchedProducts);
                 setProducts(intersection);
+                setCurrentPage(1);
             }
             else {
                 await filterAllByPrice(left, right);
                 setProducts(allProductsInRange);
+                setCurrentPage(1);
             }
         }
         else if (isSearched)
         {
             await searchAllByName(searchString);
             setProducts(allSearchedProducts);
+            setCurrentPage(1);
         }
         else
             await fetchProducts();
