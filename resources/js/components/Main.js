@@ -16,9 +16,30 @@ const Main = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [productsPerPage] = useState(8);
 
-    const fetchProducts = async () => {
+    const fetchProducts = async (appliedSort) => {
         const response = await fetch("http://127.0.0.1:8000/api/products");
         const json = await response.json();
+        if (appliedSort !== 'empty')
+        {
+            switch (appliedSort) {
+                case 'descPrice': {
+                    json.data.sort(sortPrice).reverse();
+                    break;
+                }
+                case 'ascPrice': {
+                    json.data.sort(sortPrice);
+                    break;
+                }
+                case 'descName': {
+                    json.data.sort(sortName).reverse();
+                    break;
+                }
+                case 'ascName': {
+                    json.data.sort(sortName);
+                    break;
+                }
+            }
+        }
         setProducts(json.data);
     };
 
@@ -109,6 +130,27 @@ const Main = () => {
             filteredByPriceProducts = filteredByPriceProducts.filter(value => {
                 return (value.price >= left && value.price <= right);
             });
+            if (appliedSort !== 'empty')
+            {
+                switch (appliedSort) {
+                    case 'descPrice': {
+                        filteredByPriceProducts.sort(sortPrice).reverse();
+                        break;
+                    }
+                    case 'ascPrice': {
+                        filteredByPriceProducts.sort(sortPrice);
+                        break;
+                    }
+                    case 'descName': {
+                        filteredByPriceProducts.sort(sortName).reverse();
+                        break;
+                    }
+                    case 'ascName': {
+                        filteredByPriceProducts.sort(sortName);
+                        break;
+                    }
+                }
+            }
             setProducts(filteredByPriceProducts);
             setCurrentPage(1);
             await filterAllByPrice(left, right);
@@ -133,6 +175,27 @@ const Main = () => {
             let searchedProducts = products.slice();
             searchedProducts = searchedProducts.filter(function(el) {
                 return (el.name.toLowerCase().indexOf(value.toLowerCase()) > -1 || el.name.indexOf(value) > -1)});
+            if (appliedSort !== 'empty')
+            {
+                switch (appliedSort) {
+                    case 'descPrice': {
+                        searchedProducts.sort(sortPrice).reverse();
+                        break;
+                    }
+                    case 'ascPrice': {
+                        searchedProducts.sort(sortPrice);
+                        break;
+                    }
+                    case 'descName': {
+                        searchedProducts.sort(sortName).reverse();
+                        break;
+                    }
+                    case 'ascName': {
+                        searchedProducts.sort(sortName);
+                        break;
+                    }
+                }
+            }
             setProducts(searchedProducts);
             setCurrentPage(1);
             await searchAllByName(value);
@@ -207,11 +270,53 @@ const Main = () => {
                 await searchAllByName(searchString);
                 await filterAllByPrice(left, right);
                 const intersection = performIntersection(allProductsInRange, allSearchedProducts);
+                if (radioValue !== 'empty')
+                {
+                    switch (radioValue) {
+                        case 'descPrice': {
+                            intersection.sort(sortPrice).reverse();
+                            break;
+                        }
+                        case 'ascPrice': {
+                            intersection.sort(sortPrice);
+                            break;
+                        }
+                        case 'descName': {
+                            intersection.sort(sortName).reverse();
+                            break;
+                        }
+                        case 'ascName': {
+                            intersection.sort(sortName);
+                            break;
+                        }
+                    }
+                }
                 setProducts(intersection);
                 setCurrentPage(1);
             }
             else {
                 await filterAllByPrice(left, right);
+                if (radioValue !== 'empty')
+                {
+                    switch (radioValue) {
+                        case 'descPrice': {
+                            allProductsInRange.sort(sortPrice).reverse();
+                            break;
+                        }
+                        case 'ascPrice': {
+                            allProductsInRange.sort(sortPrice);
+                            break;
+                        }
+                        case 'descName': {
+                            allProductsInRange.sort(sortName).reverse();
+                            break;
+                        }
+                        case 'ascName': {
+                            allProductsInRange.sort(sortName);
+                            break;
+                        }
+                    }
+                }
                 setProducts(allProductsInRange);
                 setCurrentPage(1);
             }
@@ -219,18 +324,39 @@ const Main = () => {
         else if (isSearched)
         {
             await searchAllByName(searchString);
+            if (radioValue !== 'empty')
+            {
+                switch (radioValue) {
+                    case 'descPrice': {
+                        allSearchedProducts.sort(sortPrice).reverse();
+                        break;
+                    }
+                    case 'ascPrice': {
+                        allSearchedProducts.sort(sortPrice);
+                        break;
+                    }
+                    case 'descName': {
+                        allSearchedProducts.sort(sortName).reverse();
+                        break;
+                    }
+                    case 'ascName': {
+                        allSearchedProducts.sort(sortName);
+                        break;
+                    }
+                }
+            }
             setProducts(allSearchedProducts);
             setCurrentPage(1);
         }
         else
         {
-            await fetchProducts();
+            await fetchProducts(radioValue);
             setCurrentPage(1);
         }
     };
 
     useEffect(() => {
-        fetchProducts();
+        fetchProducts('empty');
         fetchCart();
         fetchCategories();
         fetchCartList();
