@@ -223,7 +223,10 @@ const Main = () => {
             setCurrentPage(1);
         }
         else
+        {
             await fetchProducts();
+            setCurrentPage(1);
+        }
     };
 
     useEffect(() => {
