@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{ app()->getLocale() }}">
+<html lang="{{app()->getLocale()}}">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,6 +9,6 @@
 </head>
 <body style="background-color: #ffffff">
 <div id="root"></div>
-<script src="{{mix('js/app.js')}}" ></script>
+<script src="{{mix('js/app.js')}}"></script>
 </body>
 </html>
