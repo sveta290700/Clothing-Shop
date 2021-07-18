@@ -20,11 +20,9 @@ const ProductPage = ({ onAddToCart, refreshProducts }) => {
     const fetchProduct = (id) => {
         fetch("http://127.0.0.1:8000/api/products/" + id)
             .then(res => res.json())
-            .then(
-                (result) => {
-                    setProduct(result.data);
-                }
-                )
+            .then((result) => {
+                setProduct(result.data);
+            })
     };
 
     useEffect(() => {

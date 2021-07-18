@@ -19,7 +19,7 @@ const CartItem = ({ item, onUpdateCart, onRemoveFromCart }) => {
     };
 
     return (
-        <Card className="root">
+        <Card className="cardCartItem">
             <CardMedia image={item.attributes.image} alt={item.name} className="media"/>
             <CardContent className="cardCartContent">
                 <Typography className="productCardName">

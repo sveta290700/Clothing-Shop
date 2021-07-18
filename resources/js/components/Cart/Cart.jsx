@@ -16,9 +16,9 @@ const Cart = ({ cart, cartList, handleUpdateCart, handleRemoveFromCart, refreshP
 
     const FilledCart = () => (
         <>
-            <Grid className="items" container spacing={1}>
+            <Grid className="cartItems" container spacing={1}>
                 {cartList.map((item) => (
-                    <Grid item xs={8} sm={7} md={6} lg={3} key={item.id}>
+                    <Grid item xs={3} sm={3} md={3} lg={3} key={item.id}>
                         <CartItem item={item} onUpdateCart={handleUpdateCart} onRemoveFromCart={handleRemoveFromCart}/>
                     </Grid>
                 ))}

@@ -55,7 +55,7 @@ const ShippingForm = ({ next }) => {
                 />
                 {errors?.telephoneNumber?.type === "required" && <p>⚠ Заполните поле "Номер телефона"</p>}
                 {errors?.telephoneNumber?.type === "pattern" && <p>⚠ Некорректный формат данных в поле "Номер телефона"</p>}
-                <label className="inputLabel">Номер телефона</label>
+                <label className="inputLabel">E-mail</label>
                 <input
                     placeholder="E-mail"
                     {...register("email", {
