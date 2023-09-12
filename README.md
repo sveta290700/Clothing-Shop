@@ -1,6 +1,6 @@
 # Магазин одежды Clothing Shop
 
-<img src="https://ibb.co/nLDBDCT" alt="Homepage"/>
+<img src="https://i.ibb.co/fxC9Cvb/image.png" alt="Homepage"/>
 
 Проект выполнен в рамках летней производственной практики ДВФУ 2020-2021 учебного года.
 
